@@ -10,8 +10,10 @@ public:
     Tree &operator=(const Tree &) = default;
     ~Tree();
 
+    Tree *left, *right;
     
 
+    
 private:
     
 };
