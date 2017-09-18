@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "tree_old.h"
 
 // A utility function to check if 'c'
 // is an operator
@@ -9,34 +9,35 @@ bool isOperator(char c){
         return true;
     return false;
 }
- 
+
 // Utility function to do inorder traversal
-void inorder(et *t){
-    if(t)
-    {
+void inorder(Tree *t){
+    if(t){
+        if((t->left || t->right)) cout << "(";
         inorder(t->left);
-        printf("%c ", t->value);
+        printf("%c", t->value);
         inorder(t->right);
+        if((t->left || t->right)) cout << ")";
     }
 }
- 
+
 // A utility function to create a new node
-et* newNode(int v){
-    et *temp = new et;
+Tree* newNode(int v){
+    Tree *temp = new Tree;
     temp->left = temp->right = NULL;
     temp->value = v;
     return temp;
 };
- 
-// Returns root of constructed tree for given
+
+// RTreeurns root of constructed tree for given
 // postfix expression
-et* constructTree(char postfix[]){
-    stack<et *> st;
-    et *t, *t1, *t2;
+Tree* constructTree(string postfix){
+    stack<Tree *> st;
+    Tree *t, *t1, *t2;
  
     // Traverse through every character of
     // input expression
-    for (int i=0; i<strlen(postfix); i++){
+    for (int i=0; i<postfix.size(); i++){
         // If operand, simply push into stack
         if (!isOperator(postfix[i])){
             t = newNode(postfix[i]);
@@ -51,7 +52,7 @@ et* constructTree(char postfix[]){
             t2 = st.top();
             st.pop();
  
-            //  make them children
+            // make them children
             t->right = t1;
             t->left = t2;
  
@@ -60,7 +61,7 @@ et* constructTree(char postfix[]){
         }
     }
  
-    //  only element will be root of expression
+    // only element will be root of expression
     // tree
     t = st.top();
     st.pop();

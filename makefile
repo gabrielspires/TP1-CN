@@ -1,6 +1,6 @@
-tp1: main.cpp tree.cpp
-	g++ -o tp1 main.cpp tree.cpp
+tp1: *.cpp
+	g++ -o tp1 *.cpp
 
-run: main.cpp tree.cpp
-	g++ -o tp1 main.cpp tree.cpp
+run: *.cpp
+	g++ -o tp1 *.cpp
 	./tp1

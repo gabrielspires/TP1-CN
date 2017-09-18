@@ -1,11 +1,15 @@
 // C++ program for expression tree
-#include<bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+
+#include <stack>
+
 using namespace std;
  
 // An expression tree node
-struct et{
+struct Tree{
     char value;
-    et* left, *right;
+    Tree *left, *right;
 };
  
 // A utility function to check if 'c'
@@ -13,10 +17,11 @@ struct et{
 bool isOperator(char c);
  
 // Utility function to do inorder traversal
-void inorder(et *t);
+void inorder(Tree *t);
+
 // A utility function to create a new node
-et* newNode(int v);
+Tree* newNode(int v);
  
 // Returns root of constructed tree for given
 // postfix expression
-et* constructTree(char postfix[]);
+Tree* constructTree(string postfix);
