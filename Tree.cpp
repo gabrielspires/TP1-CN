@@ -1,27 +1,37 @@
 #ifndef TP1_TREE_
 #define TP1_TREE_
 
+#include "dependencies.h"
+
+
 class Tree{
 public:
-    Tree();
-    Tree(Tree &&) = default;
-    Tree(const Tree &) = default;
-    Tree &operator=(Tree &&) = default;
-    Tree &operator=(const Tree &) = default;
-    ~Tree();
+    Tree(){
+    	this->node_value = operators[rand() % operators.size()];
+    }
 
+    bool isOperand(){
+        if (this->node_value == "+" ||
+        this->node_value == "-" ||
+        this->node_value == "/" ||
+        this->node_value == "*"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    // ~Tree(){
+    // }
+    
     Tree *left, *right;
+    string node_value;
     
 
     
 private:
     
 };
-
-Tree::Tree(){
-}
-
-Tree::~Tree(){
-}
 
 #endif //TP1_TREE_

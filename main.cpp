@@ -1,10 +1,10 @@
-#include <iostream>
+#include "dependencies.h"
 #include "Tree.cpp"
 #include "Individual.cpp"
 
-using namespace std;
-
 int main(){
+    srand(time(NULL));
+    
     int ind_max_size = 7,
         init_pop_size = 50,
         max_pop_size = 500,
@@ -15,6 +15,10 @@ int main(){
            mut_rate = 0.05;
 
     bool use_elitism = true;
+
+    Tree jooj;
+    cout << jooj.node_value << endl;
+    cout << jooj.isOperand() << endl;
 
     return 0;
 }

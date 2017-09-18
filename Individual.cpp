@@ -3,22 +3,14 @@
 
 class Individual{
 public:
-    Individual();
-    Individual(Individual &&) = default;
-    Individual(const Individual &) = default;
-    Individual &operator=(Individual &&) = default;
-    Individual &operator=(const Individual &) = default;
+    Individual(){
+
+    };
     ~Individual();
     
 
 private:
     
 };
-
-Individual::Individual(){
-}
-
-Individual::~Individual(){
-}
 
 #endif //TP1_INDIVIDUAL_
