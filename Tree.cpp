@@ -7,19 +7,20 @@
 class Tree{
 public:
     Tree(){
-    	this->node_value = operators[rand() % operators.size()];
+    	this->node_value = operators[rand() % (sizeof(operators)/sizeof(string))];
     }
 
     bool isOperand(){
-        if (this->node_value == "+" ||
-        this->node_value == "-" ||
-        this->node_value == "/" ||
-        this->node_value == "*"){
-            return true;
-        }
-        else{
-            return false;
-        }
+        switch(int(this->node_value[0])){
+            case SUM:
+            case SUB:
+            case MUL:
+            case DIV:
+            case COS:
+            case SIN:
+                return true;
+        };
+        return false;
     }
     
     // ~Tree(){

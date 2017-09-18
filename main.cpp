@@ -20,7 +20,9 @@ int main(){
     cout << jooj.node_value << endl;
     cout << jooj.isOperand() << endl;
 
-    cout << char(SUM) << endl;
+    Operator a = SUB;
+
+    cout << sizeof(operators)/sizeof(string) << endl;
 
     return 0;
 }
