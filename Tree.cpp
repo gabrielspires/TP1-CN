@@ -28,7 +28,6 @@ public:
     Tree *left, *right;
     string node_value;
     
-
     
 private:
     

@@ -20,5 +20,7 @@ int main(){
     cout << jooj.node_value << endl;
     cout << jooj.isOperand() << endl;
 
+    cout << char(SUM) << endl;
+
     return 0;
 }
