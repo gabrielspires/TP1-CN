@@ -19,6 +19,9 @@ int main(){
 
     // for (int i = 0; i < 15; ++i){
     	Tree *jooj = new Tree();
+        jooj->left = new Tree();
+        jooj->right = new Tree();
+
 	    cout << "Node value: \t" << jooj->node_value << endl;
 	    cout << "isOperand: \t" << jooj->isOperand() << endl;
 	    cout << "isOVariable: \t" << jooj->isVariable() << endl;
@@ -30,8 +33,9 @@ int main(){
     // cout << "# of VAR: " << num_of_var << endl;
 
     Individual ind;
-    ind.generateGenotype(jooj);
-    ind.inOrder(jooj);
+    ind.genotype = jooj;
+    // ind.generateGenotype(jooj);
+    ind.inOrder(ind.genotype);
 
     return 0;
 }

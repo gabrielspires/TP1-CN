@@ -6,18 +6,23 @@
 
 class Tree{
 public:
-    Tree(){ //Construtor, gera o nó da arvore
-    	int node_type = rand()%3;
+    Tree(){
+        int node_type = rand()%3;
+        if(node_type == 0) this->generateOperand();
+        if(node_type == 1) this->generateVariable();
+        if(node_type == 2) this->generateTerminal();
+    }
 
-    	ostringstream terminal;
-    	terminal << rand()%100;
-
-    	if (node_type == 0)
-    		this->node_value = operators[rand() % num_of_op];
-    	else if (node_type == 1)
-    		this->node_value = variables[rand() % num_of_var];
-    	else
-    		this->node_value = terminal.str();
+    void generateOperand(){
+        this->node_value = operators[rand() % num_of_op];
+    }
+    void generateVariable(){
+        this->node_value = variables[rand() % num_of_var];
+    }
+    void generateTerminal(){
+        ostringstream terminal;
+        terminal << (rand()%(MAX_CONST+1))-(rand()%(MIN_CONST+1));
+        this->node_value = terminal.str();
     }
 
     bool isOperand(){

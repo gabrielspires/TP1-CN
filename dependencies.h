@@ -16,5 +16,6 @@ const string variables[] = {"x1" , "x2", "x3", "x4", "x5", "x6", "x7", "x8"};
 const int num_of_op = (sizeof(operators)/sizeof(string));
 const int num_of_var = (sizeof(variables)/sizeof(string));
 
+const int MIN_CONST = 0, MAX_CONST = 100;
 
 #endif //TP1_DEPENDENCIES_

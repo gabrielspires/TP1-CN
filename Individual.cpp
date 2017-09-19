@@ -12,6 +12,7 @@ public:
     ~Individual(){
     };
 
+    Tree *genotype;
 
     void generateGenotype(Tree *node){
     	cout << ind_size << endl;
@@ -32,8 +33,8 @@ public:
     		}
     	}
     }
-    //Terminar de gerar o individuo!!!!!!!!!!!!!!!!!!!!!
 
+    //Terminar de gerar o individuo!!!!!!!!!!!!!!!!!!!!!
     void inOrder(Tree *node){
     	if(node){
     		if((node->left || node->right)) cout << "(";
