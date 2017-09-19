@@ -16,13 +16,22 @@ int main(){
 
     bool use_elitism = true;
 
-    Tree jooj;
-    cout << jooj.node_value << endl;
-    cout << jooj.isOperand() << endl;
 
-    Operator a = SUB;
+    // for (int i = 0; i < 15; ++i){
+    	Tree *jooj = new Tree();
+	    cout << "Node value: \t" << jooj->node_value << endl;
+	    cout << "isOperand: \t" << jooj->isOperand() << endl;
+	    cout << "isOVariable: \t" << jooj->isVariable() << endl;
+	    cout << "isTerminal: \t" << jooj->isTerminal() << endl;
+	    cout << endl;
+	// }
 
-    cout << sizeof(operators)/sizeof(string) << endl;
+    // cout << "# of OP: " << num_of_op << endl;
+    // cout << "# of VAR: " << num_of_var << endl;
+
+    Individual ind;
+    ind.generateGenotype(jooj);
+    ind.inOrder(jooj);
 
     return 0;
 }

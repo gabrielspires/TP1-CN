@@ -6,23 +6,40 @@
 
 class Tree{
 public:
-    Tree(){
-    	this->node_value = operators[rand() % (sizeof(operators)/sizeof(string))];
+    Tree(){ //Construtor, gera o nó da arvore
+    	int node_type = rand()%3;
+
+    	ostringstream terminal;
+    	terminal << rand()%100;
+
+    	if (node_type == 0)
+    		this->node_value = operators[rand() % num_of_op];
+    	else if (node_type == 1)
+    		this->node_value = variables[rand() % num_of_var];
+    	else
+    		this->node_value = terminal.str();
     }
 
     bool isOperand(){
-        switch(int(this->node_value[0])){
-            case SUM:
-            case SUB:
-            case MUL:
-            case DIV:
-            case COS:
-            case SIN:
-                return true;
-        };
+        for (int i = 0; i < num_of_op; ++i){
+        	if (this->node_value == operators[i])
+        		return true;
+        }
         return false;
     }
-    
+
+    bool isVariable(){
+        for (int i = 0; i < num_of_var; ++i){
+        	if (this->node_value == variables[i])
+        		return true;
+        }
+        return false;
+    }
+
+    bool isTerminal(){
+        return (!this->isOperand() && !this->isVariable());
+    }
+
     // ~Tree(){
     // }
     
