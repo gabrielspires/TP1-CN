@@ -8,12 +8,12 @@ class Tree{
 public:
     Tree(){
         int node_type = rand()%3;
-        if(node_type == 0) this->generateOperand();
+        if(node_type == 0) this->generateOperator();
         if(node_type == 1) this->generateVariable();
         if(node_type == 2) this->generateTerminal();
     }
 
-    void generateOperand(){
+    void generateOperator(){
         this->node_value = operators[rand() % num_of_op];
     }
     void generateVariable(){

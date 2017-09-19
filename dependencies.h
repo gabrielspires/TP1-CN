@@ -18,4 +18,13 @@ const int num_of_var = (sizeof(variables)/sizeof(string));
 
 const int MIN_CONST = 0, MAX_CONST = 100;
 
+string generateReversePolish(){
+	string expression;
+
+	expression = "x1";
+	// expression = strcat(expression, "x2");
+
+	return expression;
+}
+
 #endif //TP1_DEPENDENCIES_
