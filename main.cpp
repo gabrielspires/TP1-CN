@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]){
 
     ifstream entrada;
 
-    readInput(&entrada, argv[1]);
+    // readInput(&entrada, argv[1]);
 
     // for (int i = 0; i < 15; ++i){
         Individual *j = new Individual();
@@ -30,10 +30,12 @@ int main(int argc, char const *argv[]){
 	    cout << "isVariable: \t" << j->genotype->isVariable() << endl;
 	    cout << "isTerminal: \t" << j->genotype->isTerminal() << endl;
 	    cout << endl;
+
+        delete j;
 	// }
 
     // cout << "# of OP: " << num_of_op << endl;
-    // cout << "# of VAR: " << num_of_var << endl;
+    // cout << "# of VAR: " << num_of_var << endl;z
 
     return 0;
 }

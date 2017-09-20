@@ -13,13 +13,15 @@ public:
     	this->generateGenotype(this->genotype);
     };
     ~Individual(){
+        deleteTree(this->genotype);
+        // delete this->genotype;
     };
 
     Tree *genotype;
 	int ind_size;
 
     void generateGenotype(Tree *node){
-    	cout << "IND SIZE: " << this->ind_size << endl;
+    	// cout << "IND SIZE: " << this->ind_size << endl;
     	if(this->ind_size >= 7 && !node->isOperator()) return;
     	
     	this->ind_size++;
@@ -58,7 +60,13 @@ public:
 
     // Tree node;
 private:
-    
+    void deleteTree(Tree *node) {    
+        if (!node) return;
+        deleteTree(node->left);
+        deleteTree(node->right);
+
+        delete node;
+    }
 };
 
 #endif //TP1_INDIVIDUAL_

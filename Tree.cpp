@@ -11,12 +11,16 @@ public:
         if(node_type <= 0.90) this->generateOperator();
         else if(node_type <= 0.93) this->generateVariable();
         else if(node_type <= 1.00) this->generateTerminal();
+
+        this->left = this->right = NULL;
     }
     Tree(){
         double node_type = (rand()%100)/100.0;
         if(node_type <= 0.60) this->generateOperator();
         else if(node_type <= 0.80) this->generateVariable();
         else if(node_type <= 1.00) this->generateTerminal();
+        
+        this->left = this->right = NULL;
     }
 
     void generateOperator(){
