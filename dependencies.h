@@ -1,30 +1,32 @@
 #ifndef TP1_DEPENDENCIES_
 #define TP1_DEPENDENCIES_
 
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <string>
-#include <sstream>
+#include <iostream>//Biblioteca padrão do C++
+#include <cstdlib> //Biblioteca padrão do C
+#include <ctime>   //Time pra geração da seed do rand()
+#include <string>  //Lida com strings
+#include <sstream> //Lida com string streams
+#include <fstream> //Lida com entrada/saida de arquivos
 
 using namespace std;
 
 // enum Operator{ SUM, SUB, DIV, MUL, COS, SIN };
 const string operators[] = {"+", "-", "/", "*", "cos", "sin"};
 const string variables[] = {"x1" , "x2", "x3", "x4", "x5", "x6", "x7", "x8"};
+enum vars{x1,x2,x3,x4,x5,x6,x7,x8};
 
 const int num_of_op = (sizeof(operators)/sizeof(string));
 const int num_of_var = (sizeof(variables)/sizeof(string));
 
 const int MIN_CONST = 0, MAX_CONST = 100;
 
-string generateReversePolish(){
-	string expression;
+/*void readInput(ifstream *csv, string arg){
+	string linha;
 
-	expression = "x1";
-	// expression = strcat(expression, "x2");
+	csv->open(arg.c_str());
+	getline(*csv, linha, '\n');
 
-	return expression;
-}
+	cout << linha << endl;
+}*/
 
 #endif //TP1_DEPENDENCIES_

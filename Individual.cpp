@@ -7,31 +7,42 @@
 class Individual{
 public:
     Individual(){
-    	ind_size = 0;
+    	this->ind_size = 1;
+    	bool isRoot = true;
+    	this->genotype = new Tree(isRoot);
+    	this->generateGenotype(this->genotype);
     };
     ~Individual(){
     };
 
     Tree *genotype;
+	int ind_size;
 
     void generateGenotype(Tree *node){
-    	cout << ind_size << endl;
-    	cout << node->node_value << endl;
-    	if(ind_size >= 7 || !node->isOperand()) return;
-    	ind_size++;
-    	if (node->isOperand()){
+    	cout << "IND SIZE: " << this->ind_size << endl;
+    	if(this->ind_size >= 7 && !node->isOperator()) return;
+    	
+    	this->ind_size++;
+
+    	if (node->isOperator()){
     		if(node->node_value != "cos" && node->node_value != "sin"){
     			node->left = new Tree();
-    			generateGenotype(node->left);
-
     			node->right = new Tree();
+    			generateGenotype(node->left);
     			generateGenotype(node->right);
     		}
     		else {
-				node->left = new Tree();
-    			generateGenotype(node->left);
+    			int trig_param = rand()%10;
+
+				node->right = new Tree();
+				if(trig_param < 5)
+					node->right->generateVariable();
+				else{
+					node->right->generateTerminal();
+				}
     		}
     	}
+    	this->ind_size--;
     }
 
     //Terminar de gerar o individuo!!!!!!!!!!!!!!!!!!!!!
@@ -47,7 +58,6 @@ public:
 
     // Tree node;
 private:
-	int ind_size;
     
 };
 

@@ -6,11 +6,17 @@
 
 class Tree{
 public:
+    Tree(bool isRoot){
+        double node_type = (rand()%100)/100.0;
+        if(node_type <= 0.90) this->generateOperator();
+        else if(node_type <= 0.93) this->generateVariable();
+        else if(node_type <= 1.00) this->generateTerminal();
+    }
     Tree(){
-        int node_type = rand()%3;
-        if(node_type == 0) this->generateOperator();
-        if(node_type == 1) this->generateVariable();
-        if(node_type == 2) this->generateTerminal();
+        double node_type = (rand()%100)/100.0;
+        if(node_type <= 0.60) this->generateOperator();
+        else if(node_type <= 0.80) this->generateVariable();
+        else if(node_type <= 1.00) this->generateTerminal();
     }
 
     void generateOperator(){
@@ -25,7 +31,7 @@ public:
         this->node_value = terminal.str();
     }
 
-    bool isOperand(){
+    bool isOperator(){
         for (int i = 0; i < num_of_op; ++i){
         	if (this->node_value == operators[i])
         		return true;
@@ -42,14 +48,14 @@ public:
     }
 
     bool isTerminal(){
-        return (!this->isOperand() && !this->isVariable());
+        return (!this->isOperator() && !this->isVariable());
     }
 
     // ~Tree(){
     // }
     
-    Tree *left, *right;
     string node_value;
+    Tree *left, *right;
     
     
 private:

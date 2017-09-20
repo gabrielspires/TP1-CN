@@ -2,7 +2,7 @@
 #include "Tree.cpp"
 #include "Individual.cpp"
 
-int main(){
+int main(int argc, char const *argv[]){
     srand(time(NULL));
     
     int ind_max_size = 7,
@@ -16,26 +16,24 @@ int main(){
 
     bool use_elitism = true;
 
+    ifstream entrada;
+
+    readInput(&entrada, argv[1]);
 
     // for (int i = 0; i < 15; ++i){
-    	Tree *jooj = new Tree();
-        jooj->left = new Tree();
-        jooj->right = new Tree();
+        Individual *j = new Individual();
 
-	    cout << "Node value: \t" << jooj->node_value << endl;
-	    cout << "isOperand: \t" << jooj->isOperand() << endl;
-	    cout << "isOVariable: \t" << jooj->isVariable() << endl;
-	    cout << "isTerminal: \t" << jooj->isTerminal() << endl;
+        j->inOrder(j->genotype);
+
+	    cout << "\nRoot value: \t" << j->genotype->node_value << endl;
+	    cout << "isOperator: \t" << j->genotype->isOperator() << endl;
+	    cout << "isVariable: \t" << j->genotype->isVariable() << endl;
+	    cout << "isTerminal: \t" << j->genotype->isTerminal() << endl;
 	    cout << endl;
 	// }
 
     // cout << "# of OP: " << num_of_op << endl;
     // cout << "# of VAR: " << num_of_var << endl;
-
-    Individual ind;
-    ind.genotype = jooj;
-    // ind.generateGenotype(jooj);
-    ind.inOrder(ind.genotype);
 
     return 0;
 }
