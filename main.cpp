@@ -18,21 +18,23 @@ int main(int argc, char const *argv[]){
 
     ifstream entrada;
 
+    vector <Individual*> population;
+
     // readInput(&entrada, argv[1]);
 
-    // for (int i = 0; i < 15; ++i){
-        Individual *j = new Individual();
+    for (int i = 0; i < max_pop_size; ++i){
+        population.push_back(new Individual);
 
-        j->inOrder(j->genotype);
+        population[i]->printExpression(population[i]->genotype);
 
-	    cout << "\nRoot value: \t" << j->genotype->node_value << endl;
-	    cout << "isOperator: \t" << j->genotype->isOperator() << endl;
-	    cout << "isVariable: \t" << j->genotype->isVariable() << endl;
-	    cout << "isTerminal: \t" << j->genotype->isTerminal() << endl;
-	    cout << endl;
+        // cout << "\nRoot value: \t" << population[i]->genotype->node_value << endl;
+        // cout << "isOperator: \t" << population[i]->genotype->isOperator() << endl;
+        // cout << "isVariable: \t" << population[i]->genotype->isVariable() << endl;
+        // cout << "isTerminal: \t" << population[i]->genotype->isTerminal() << endl;
+        cout << endl;
 
-        delete j;
-	// }
+        delete population[i];
+    }
 
     // cout << "# of OP: " << num_of_op << endl;
     // cout << "# of VAR: " << num_of_var << endl;z

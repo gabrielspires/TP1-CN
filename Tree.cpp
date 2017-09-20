@@ -3,7 +3,6 @@
 
 #include "dependencies.h"
 
-
 class Tree{
 public:
     Tree(bool isRoot){
@@ -37,16 +36,16 @@ public:
 
     bool isOperator(){
         for (int i = 0; i < num_of_op; ++i){
-        	if (this->node_value == operators[i])
-        		return true;
+            if (this->node_value == operators[i])
+                return true;
         }
         return false;
     }
 
     bool isVariable(){
         for (int i = 0; i < num_of_var; ++i){
-        	if (this->node_value == variables[i])
-        		return true;
+            if (this->node_value == variables[i])
+                return true;
         }
         return false;
     }

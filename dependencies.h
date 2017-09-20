@@ -7,6 +7,7 @@
 #include <string>  //Lida com strings
 #include <sstream> //Lida com string streams
 #include <fstream> //Lida com entrada/saida de arquivos
+#include <vector>
 
 using namespace std;
 
@@ -19,14 +20,5 @@ const int num_of_op = (sizeof(operators)/sizeof(string));
 const int num_of_var = (sizeof(variables)/sizeof(string));
 
 const int MIN_CONST = 0, MAX_CONST = 100;
-
-/*void readInput(ifstream *csv, string arg){
-	string linha;
-
-	csv->open(arg.c_str());
-	getline(*csv, linha, '\n');
-
-	cout << linha << endl;
-}*/
 
 #endif //TP1_DEPENDENCIES_
