@@ -1,29 +1,19 @@
-#include "dependencies.h"
-#include "Tree.cpp"
 #include "Individual.cpp"
 
+// #include "dependencies.h"
 #include "functions.h"
 
 int main(int argc, char const *argv[]){
     srand(time(NULL));
-    
-    int ind_max_size = 7,
-        init_pop_size = 10,
-        max_pop_size = 20,
-        max_gen = 500,
-        tourn_size = 5;
 
-    double cross_rate = 0.95,
-           mut_rate = 0.05;
-
-    bool use_elitism = true;
-
+    int num_of_var;
     vector <Individual*> population;
 
     vector< vector<double> > dataset_train;
     vector< vector<double> > dataset_test;
 
-    ifstream input_train(argv[1]), input_test(argv[2]);
+    ifstream input_train(argv[1]),
+    		 input_test(argv[2]);
 
     // cout << "Individual max size: "; cin >> ind_max_size;
     // cout << "Initial pop. size: "; cin >> init_pop_size;
@@ -36,16 +26,25 @@ int main(int argc, char const *argv[]){
 
     read_CSV(dataset_train, dataset_test, input_train, input_test);
 
-    for (int i = 0; i < max_pop_size; ++i){
-        population.push_back(new Individual);
+    num_of_var = dataset_train[0].size() - 1;
 
-        // population[i]->printExpression(population[i]->genotype);
+    // for (int i = 0; i < dataset_train.size(); ++i){
+    // 	for (int j = 0; j < dataset_train[i].size(); ++j){
+    // 		cout << setprecision(11) << dataset_train[i][j] << "\t";
+    // 	}
+    // 	cout << endl;
+    // }
+
+    for (int i = 0; i < max_pop_size; ++i){
+        population.push_back(new Individual(num_of_var));
+
+        population[i]->printExpression(population[i]->genotype);
+        cout << endl;
 
         // cout << "\nRoot value: \t" << population[i]->genotype->node_value << endl;
         // cout << "isOperator: \t" << population[i]->genotype->isOperator() << endl;
         // cout << "isVariable: \t" << population[i]->genotype->isVariable() << endl;
         // cout << "isTerminal: \t" << population[i]->genotype->isTerminal() << endl;
-        cout << endl;
 
         delete population[i];
     }

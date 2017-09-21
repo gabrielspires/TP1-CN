@@ -1,15 +1,15 @@
-#ifndef TP1_INDIVIDUAL_
-#define TP1_INDIVIDUAL_
+#ifndef INDIVIDUAL_CPP
+#define INDIVIDUAL_CPP
 
-#include "dependencies.h"
 #include "Tree.cpp"
 
 class Individual{
 public:
-    Individual(){
+    Individual(int num_of_var){
+    	this->num_of_var = num_of_var;
         this->ind_size = 1;
         bool isRoot = true;
-        this->genotype = new Tree(isRoot);
+        this->genotype = new Tree(isRoot, num_of_var);
         this->generateGenotype(this->genotype);
     };
     ~Individual(){
@@ -19,6 +19,7 @@ public:
 
     Tree *genotype;
     int ind_size;
+    int num_of_var;
 
     void generateGenotype(Tree *node){
         // cout << "IND SIZE: " << this->ind_size << endl;
@@ -28,15 +29,15 @@ public:
 
         if (node->isOperator()){
             if(node->node_value != "cos" && node->node_value != "sin"){
-                node->left = new Tree();
-                node->right = new Tree();
+                node->left = new Tree(num_of_var);
+                node->right = new Tree(num_of_var);
                 generateGenotype(node->left);
                 generateGenotype(node->right);
             }
             else {
                 int trig_param = rand()%10;
 
-                node->right = new Tree();
+                node->right = new Tree(num_of_var);
                 if(trig_param < 5)
                     node->right->generateVariable();
                 else{
@@ -75,4 +76,4 @@ private:
     }
 };
 
-#endif //TP1_INDIVIDUAL_
+#endif //INDIVIDUAL_CPP

@@ -1,11 +1,15 @@
-#ifndef TP1_TREE_
-#define TP1_TREE_
+#ifndef TREE_H
+#define TREE_H
 
 #include "dependencies.h"
 
 class Tree{
 public:
-    Tree(bool isRoot){
+    string node_value;
+    Tree *left, *right;
+    int num_of_var;
+    Tree(bool isRoot, int num_of_var){
+    	this->num_of_var = num_of_var;
         double node_type = (rand()%100)/100.0;
         if(node_type <= 0.90) this->generateOperator();
         else if(node_type <= 0.93) this->generateVariable();
@@ -13,7 +17,8 @@ public:
 
         this->left = this->right = NULL;
     }
-    Tree(){
+    Tree(int num_of_var){
+    	this->num_of_var = num_of_var;
         double node_type = (rand()%100)/100.0;
         if(node_type <= 0.60) this->generateOperator();
         else if(node_type <= 0.80) this->generateVariable();
@@ -57,8 +62,6 @@ public:
     // ~Tree(){
     // }
     
-    string node_value;
-    Tree *left, *right;
     
     
 private:
