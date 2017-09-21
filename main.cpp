@@ -35,13 +35,20 @@ int main(int argc, char const *argv[]){
     // 	}
     // 	cout << endl;
     // }
+    double cu;
+    
+    for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " ";
+        cout << endl;
 
     for (int i = 0; i < max_pop_size; ++i){
         population.push_back(new Individual(num_of_var));
 
-        cout << population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 0) << " = ";
         population[i]->printExpression(population[i]->genotype);
+        cu =population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 40);
         cout << endl;
+        population[i]->printExpression(population[i]->genotype);
+        // cout << "Resultado: " << population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 40) << " Expressao: ";
+        cout << endl << endl;
 
         // cout << "\nRoot value: \t" << population[i]->genotype->node_value << endl;
         // cout << "isOperator: \t" << population[i]->genotype->isOperator() << endl;
