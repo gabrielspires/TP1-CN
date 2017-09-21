@@ -63,7 +63,7 @@ public:
 	{
 	    if (node->left != NULL && node->right != NULL)
 	    {
-	        if(node->node_value == "+")
+	        if(node->node_value == "+"){
 	            return node->left->evaluate(node->left, data_set) + right->evaluate(node->right, data_set);
 	        // ############################################################################################################################
 	            // remaining operators left as an exercise for the reader
