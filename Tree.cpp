@@ -59,35 +59,50 @@ public:
         return (!this->isOperator() && !this->isVariable());
     }
 
-    double evaluate(Tree *node, vector< vector<double> > data_set) const
-	{
+    double evaluate(Tree *node, vector< vector<double> > data_set, int index){
 	    if (node->left != NULL && node->right != NULL){ //Binary operators
 	        if(node->node_value == "+")
-	            return node->left->evaluate(node->left, data_set) + node->right->evaluate(node->right, data_set);
+	            return node->left->evaluate(node->left, data_set, index) + node->right->evaluate(node->right, data_set, index);
             else if(node->node_value == "-")
-                return node->left->evaluate(node->left, data_set) - node->right->evaluate(node->right, data_set);
+                return node->left->evaluate(node->left, data_set, index) - node->right->evaluate(node->right, data_set, index);
             else if(node->node_value == "*")
-                return node->left->evaluate(node->left, data_set) * node->right->evaluate(node->right, data_set);
+                return node->left->evaluate(node->left, data_set, index) * node->right->evaluate(node->right, data_set, index);
             else if(node->node_value == "/"){
-                if(node->right->node_value == "0") //Divisão por zero
+                double eval_left, eval_right;
+                eval_left = node->left->evaluate(node->left, data_set, index);
+                eval_right = node->right->evaluate(node->right, data_set, index);
+
+                if(eval_right == 0) //Divisao por zero (retorna sempre 1)
                     return 1;
                 else
-                    return node->left->evaluate(node->left, data_set) / node->right->evaluate(node->right, data_set);
+                    return eval_left / eval_right;
             }
 	    }
         else if (node->left == NULL && node->right != NULL){ //Trigonometric operators
             if (node->node_value == "cos"){
-                return cos(node->right->evaluate(node->right, data_set));
+                return cos(node->right->evaluate(node->right, data_set, index));
             }
             else if (node->node_value == "sin"){
-                return sin(node->right->evaluate(node->right, data_set));   
+                return sin(node->right->evaluate(node->right, data_set, index));   
             }
         }
-        else if(node->isVariable()){
-            // TODO - SUBSTITUIR AS VARIÁVEIS PELA ENTRADA DO DATA_SET
-            // node->node_value = data_set[i][j];
+        else if(node->isVariable()){ //SUBSTITUI AS VARIÁVEIS PELA ENTRADA DO DATA_SET
+            int i;
+
+            //Procura qual variavel é (x1, x2, ...) e retorna seu índice
+            for (i = 0; i < this->num_of_var; ++i){
+                if (node->node_value == variables[i])
+                    break;
+                else if (i == this->num_of_var - 1){ //Se a variável n tiver no "dicionário" da um erro
+                    cout << "ERRO!! VARIAVEL NAO ENCONTRADA" << endl;
+                }
+            }
+            stringstream variable; //converte o double do dataset em string pra arvore
+            variable << data_set[index][i];
+            variable >> node->node_value;
         }
-        //Terminal
+        //Se n entrar nos if's acima é pq o nó é uma constante (terminal)
+        //daí retorna o valor double do terminal pra fazer os devidos cálculos
         stringstream terminal;
         double terminal_value;
         terminal << node->node_value;

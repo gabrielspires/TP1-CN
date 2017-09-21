@@ -20,7 +20,7 @@ const int ind_max_size = 7,
 	    tourn_size = 5;
 
 const double cross_rate = 0.95,
-       mut_rate = 0.05;
+       		 mut_rate = 0.05;
 
 const bool use_elitism = true;
 
@@ -32,6 +32,6 @@ enum vars{x1,x2,x3,x4,x5,x6,x7,x8};
 const int num_of_op = (sizeof(operators)/sizeof(string));
 // const int num_of_var = (sizeof(variables)/sizeof(string));
 
-const int MIN_CONST = 0, MAX_CONST = 100;
+const int MIN_CONST = 0, MAX_CONST = 7;
 
 #endif //DEPENDENCIES_H

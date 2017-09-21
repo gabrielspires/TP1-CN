@@ -1,16 +1,14 @@
 #include "functions.h"
 
-void read_CSV(vector< vector<double> > &dataset_train,
-			 vector< vector<double> > &dataset_test,
-			 ifstream &input_train,
-			 ifstream &input_test){
+void read_CSV(vector< vector<double> > &dataset,
+			 ifstream &input){
 	string line, cell;
 	double cell_value;
 	int i = 0;
 
-	while(getline(input_train, line, '\n')){
+	while(getline(input, line, '\n')){
 		vector<double> lineVector;
-		dataset_train.push_back(lineVector);
+		dataset.push_back(lineVector);
 
 		// cout << line << endl;
 		stringstream line_stream(line);
@@ -19,13 +17,11 @@ void read_CSV(vector< vector<double> > &dataset_train,
 			stringstream cell_stream(cell);
 			cell_stream >> cell_value;
 			// cout << "C: " << cell_value << " ";
-			dataset_train[i].push_back(cell_value);
+			dataset[i].push_back(cell_value);
 		}
 		// cout << endl;
 		i++;
 	}
 
-
-	input_train.close();
-	input_test.close();
+	input.close();
 }

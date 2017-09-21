@@ -8,8 +8,6 @@
 
 using namespace std;
 
-void read_CSV(vector< vector<double> > &,
-			 vector< vector<double> > &,
-			 ifstream&, ifstream&);
+void read_CSV(vector< vector<double> > &, ifstream&);
 
 #endif //FUNCTIONS_H

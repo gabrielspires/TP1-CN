@@ -24,7 +24,8 @@ int main(int argc, char const *argv[]){
     // cout << "Mutation rate: "; cin >> mut_rate;
 
 
-    read_CSV(dataset_train, dataset_test, input_train, input_test);
+    read_CSV(dataset_train, input_train);
+    read_CSV(dataset_test, input_test);
 
     num_of_var = dataset_train[0].size() - 1;
 
@@ -38,6 +39,7 @@ int main(int argc, char const *argv[]){
     for (int i = 0; i < max_pop_size; ++i){
         population.push_back(new Individual(num_of_var));
 
+        cout << population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 0) << " = ";
         population[i]->printExpression(population[i]->genotype);
         cout << endl;
 
@@ -48,9 +50,8 @@ int main(int argc, char const *argv[]){
 
         delete population[i];
     }
-
-    // cout << "# of OP: " << num_of_op << endl;
-    // cout << "# of VAR: " << num_of_var << endl;z
+    cout << "# of OP: " << num_of_op << endl;
+    cout << "# of VAR: " << num_of_var << endl;
 
     return 0;
 }
