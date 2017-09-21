@@ -54,6 +54,23 @@ public:
     //         population[i]->printExpression(population[i]->genotype);
     //     }
     // }
+
+ //    double eval(Tree node, vector< vector<double> > data_set){
+ //    	double result = 0;
+ //    	stringstream node_terminal;
+
+ //    	if (node.isOperator()){
+ //    		if (node.node_value == "+"){
+ //    			return node.left + node.right;
+ //    		}
+ //    	}
+ //    	else if (node.isVariable()){
+    		
+ //    	}
+ //    	else/* if (node.isTerminal())*/{
+ //    		return result;
+ //    	}
+	// }
     
     void printExpression(Tree *node){
         if(node){
