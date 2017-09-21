@@ -9,6 +9,7 @@
 #include <fstream> //Lida com entrada/saida de arquivos
 #include <vector>
 #include <iomanip>
+#include <math.h>
 
 using namespace std;
 

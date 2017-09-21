@@ -61,16 +61,39 @@ public:
 
     double evaluate(Tree *node, vector< vector<double> > data_set) const
 	{
-	    if (node->left != NULL && node->right != NULL)
-	    {
-	        if(node->node_value == "+"){
-	            return node->left->evaluate(node->left, data_set) + right->evaluate(node->right, data_set);
-	        // ############################################################################################################################
-	            // remaining operators left as an exercise for the reader
-	        // ....
-	        }
+	    if (node->left != NULL && node->right != NULL){ //Binary operators
+	        if(node->node_value == "+")
+	            return node->left->evaluate(node->left, data_set) + node->right->evaluate(node->right, data_set);
+            else if(node->node_value == "-")
+                return node->left->evaluate(node->left, data_set) - node->right->evaluate(node->right, data_set);
+            else if(node->node_value == "*")
+                return node->left->evaluate(node->left, data_set) * node->right->evaluate(node->right, data_set);
+            else if(node->node_value == "/"){
+                if(node->right->node_value == "0") //Divisão por zero
+                    return 1;
+                else
+                    return node->left->evaluate(node->left, data_set) / node->right->evaluate(node->right, data_set);
+            }
 	    }
-	    // return data;
+        else if (node->left == NULL && node->right != NULL){ //Trigonometric operators
+            if (node->node_value == "cos"){
+                return cos(node->right->evaluate(node->right, data_set));
+            }
+            else if (node->node_value == "sin"){
+                return sin(node->right->evaluate(node->right, data_set));   
+            }
+        }
+        else if(node->isVariable()){
+            // TODO - SUBSTITUIR AS VARIÁVEIS PELA ENTRADA DO DATA_SET
+            // node->node_value = data_set[i][j];
+        }
+        //Terminal
+        stringstream terminal;
+        double terminal_value;
+        terminal << node->node_value;
+        terminal >> terminal_value;
+
+        return terminal_value;
 	}
 
     // ~Tree(){
