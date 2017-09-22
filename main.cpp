@@ -15,6 +15,9 @@ int main(int argc, char const *argv[]){
     ifstream input_train(argv[1]),
     		 input_test(argv[2]);
 
+    double sum = 0;
+    double fit_med = 0;
+
     // cout << "Individual max size: "; cin >> ind_max_size;
     // cout << "Initial pop. size: "; cin >> init_pop_size;
     // cout << "Maximum pop. size: "; cin >> max_pop_size;
@@ -29,36 +32,43 @@ int main(int argc, char const *argv[]){
 
     num_of_var = dataset_train[0].size() - 1;
 
-    // for (int i = 0; i < dataset_train.size(); ++i){
-    // 	for (int j = 0; j < dataset_train[i].size(); ++j){
-    // 		cout << setprecision(11) << dataset_train[i][j] << "\t";
-    // 	}
-    // 	cout << endl;
-    // }
-    double cu;
-    
-    for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " ";
-        cout << endl;
+    for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " "; cout << endl;
 
-    for (int i = 0; i < max_pop_size; ++i){
+	cout << "Y = " << dataset_train[0][dataset_train[0].size()-1] << endl;
+    
+    for (int i = 0; i < init_pop_size; i++){
+    	//Cria um novo individuo
+    	sum = 0;
         population.push_back(new Individual(num_of_var));
 
-        population[i]->printExpression(population[i]->genotype);
-        cu =population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 40);
-        cout << endl;
-        population[i]->printExpression(population[i]->genotype);
-        // cout << "Resultado: " << population[i]->genotype->evaluate(population[i]->genotype, dataset_train, 40) << " Expressao: ";
-        cout << endl << endl;
+        for (int j = 0; j < dataset_train.size(); j++){
+        	sum += pow(population[i]->genotype->evaluate(population[i]->genotype, dataset_train[j]) - dataset_train[j][dataset_train[j].size()-1], 2);
+        }
 
-        // cout << "\nRoot value: \t" << population[i]->genotype->node_value << endl;
-        // cout << "isOperator: \t" << population[i]->genotype->isOperator() << endl;
-        // cout << "isVariable: \t" << population[i]->genotype->isVariable() << endl;
-        // cout << "isTerminal: \t" << population[i]->genotype->isTerminal() << endl;
+        population[i]->fitness = sqrt(sum/dataset_train.size());
+    	cout << "Fitness " << i << ": " << population[i]->fitness << endl;
+    	fit_med += sqrt(sum/dataset_train.size());
 
-        delete population[i];
+        // cout << "Resultado: " << population[i]->genotype->evaluate(population[i]->genotype, dataset_train[40]) << " Expressão: ";
+        // population[i]->printExpression(population[i]->genotype);
+        // cout << endl << endl;
+
     }
-    cout << "# of OP: " << num_of_op << endl;
-    cout << "# of VAR: " << num_of_var << endl;
+    cout << "Fitness media: " << fit_med/20 << endl;
+
+
+    
+    
+
+
+
+    
+    for (int i = 0; i < init_pop_size; ++i){
+    	delete population[i];
+    }
+
+    // cout << "# of OP: " << num_of_op << endl;
+    // cout << "# of VAR: " << num_of_var << endl;
 
     return 0;
 }

@@ -5,7 +5,13 @@
 
 class Individual{
 public:
+    Tree *genotype;
+    int ind_size;
+    int num_of_var;
+    double fitness;
+
     Individual(int num_of_var){
+    	this->fitness = 0.0;
     	this->num_of_var = num_of_var;
         this->ind_size = 1;
         bool isRoot = true;
@@ -17,10 +23,6 @@ public:
         // delete this->genotype;
     };
 
-    Tree *genotype;
-    int ind_size;
-    int num_of_var;
-
     void generateGenotype(Tree *node){
         // cout << "IND SIZE: " << this->ind_size << endl;
         if(this->ind_size >= 7 && !node->isOperator()) return;
@@ -30,7 +32,11 @@ public:
         if (node->isOperator()){
             if(node->node_value != "cos" && node->node_value != "sin"){
                 node->left = new Tree(num_of_var);
+                if (ind_size >=5) node->left->generateTerminal();
+                
                 node->right = new Tree(num_of_var);
+                if (ind_size >=5) node->right->generateTerminal();
+                
                 generateGenotype(node->left);
                 generateGenotype(node->right);
             }
@@ -47,30 +53,6 @@ public:
         }
         this->ind_size--;
     }
-
-    // void generatePopulation(vector <Individual*> population, int max_pop_size){
-    //     for (int i = 0; i < max_pop_size; i++){
-    //         population.push_back(new Individual);
-    //         population[i]->printExpression(population[i]->genotype);
-    //     }
-    // }
-
- //    double eval(Tree node, vector< vector<double> > data_set){
- //    	double result = 0;
- //    	stringstream node_terminal;
-
- //    	if (node.isOperator()){
- //    		if (node.node_value == "+"){
- //    			return node.left + node.right;
- //    		}
- //    	}
- //    	else if (node.isVariable()){
-    		
- //    	}
- //    	else/* if (node.isTerminal())*/{
- //    		return result;
- //    	}
-	// }
     
     void printExpression(Tree *node){
         if(node){
