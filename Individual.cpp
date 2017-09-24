@@ -9,8 +9,10 @@ public:
     int ind_size;
     int num_of_var;
     double fitness;
+    bool can_participate; //If the individual got selected by a tournament
 
     Individual(int num_of_var){
+    	this->can_participate = true;
     	this->fitness = 0.0;
     	this->num_of_var = num_of_var;
         this->ind_size = 1;

@@ -11,14 +11,15 @@
 #include <iomanip>
 #include <math.h>
 #include <random>
+#include <algorithm>
 
 using namespace std;
 
 const int ind_max_size = 7,
-	    init_pop_size = 50,
+	    init_pop_size = 15,
 	    max_pop_size = 500,
-	    max_gen = 500,
-	    tourn_size = 5;
+	    tourn_size = 5,
+	    max_gen = 500;
 
 const double cross_rate = 0.95,
        		 mut_rate = 0.05;

@@ -11,7 +11,7 @@ public:
 
     Tree(bool isRoot, int num_of_var){
     	this->num_of_var = num_of_var;
-        double node_type = (rand()%100)/100.0;
+        // double node_type = (rand()%100)/100.0;
         /*if(node_type <= 0.90) */ this->generateOperator(isRoot);
         // else if(node_type <= 0.93) this->generateVariable();
         // else if(node_type <= 1.00) this->generateTerminal();
