@@ -127,6 +127,7 @@ void crossover(Individual parent1, Individual parent2, vector <Individual*> *new
 
         VERIFICAR SE TA TROCANDO OPERADOR COM OPERADOR, ETC
         TA TUDO ERRADO ESSA BOSTA, ARRUMA AI CARA!!!
+        ADICIONAR O GLOBAL ELITE
     */
 
     new_population->push_back(child1);

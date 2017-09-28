@@ -14,5 +14,5 @@ input_run: *.cpp
 	@reset
 	@g++ -std=c++11 -o tp1 *.cpp
 	# ./tp1 datasets/keijzer-7-train.csv datasets/keijzer-7-test.csv
-	./tp1 datasets/keijzer-10-train.csv datasets/keijzer-10-test.csv
-	# ./tp1 datasets/house-train.csv datasets/house-test.csv
+	# ./tp1 datasets/keijzer-10-train.csv datasets/keijzer-10-test.csv
+	./tp1 datasets/house-train.csv datasets/house-test.csv
