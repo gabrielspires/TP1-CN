@@ -17,4 +17,6 @@ void calc_fitness(vector <Individual*> &, vector< vector<double> > , int );
 
 Individual* select(vector <Individual*> &);
 
+void postorder(Tree* p, int indent);
+
 #endif //FUNCTIONS_H

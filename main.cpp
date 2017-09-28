@@ -20,6 +20,11 @@ int main(int argc, char const *argv[]){
 
     num_of_var = dataset_train[0].size() - 1;
 
+
+    // Individual *teste = new Individual(num_of_var);
+
+    // postorder(teste->genotype, 4);
+    // teste->printExpression(teste->genotype);
     generate_population(population, num_of_var);
     calc_fitness(population, dataset_train, num_of_var);
 
@@ -27,7 +32,7 @@ int main(int argc, char const *argv[]){
     select(population);
     select(population);
     
-    //evolve(population, new_population);
+    // evolve(population, new_population);
 
 
     // for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " "; cout << endl;

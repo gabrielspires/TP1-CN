@@ -64,7 +64,7 @@ Individual *select(vector <Individual*> &population){
     if (population.size() < tourn_size)
         i = tourn_size - population.size();
 
-    for (i; i < tourn_size; i++){
+    for (; i < tourn_size; i++){
         //Escolhe um índice aleatório e continua
         //escolhendo caso o indivíduo não possa ser escolhido
         do{
@@ -157,5 +157,22 @@ void evolve(vector <Individual*> &population, vector <Individual*> &new_populati
 
         //Add the child to the new population
         new_population.push_back(child);
+    }
+}
+
+void postorder(Tree* p, int indent){
+    if(p != NULL) {
+        if(p->right) {
+            postorder(p->right, indent+4);
+        }
+        if (indent) {
+            std::cout << std::setw(indent) << ' ';
+        }
+        if (p->right) std::cout<<" /\n" << std::setw(indent) << ' ';
+        std::cout<< p->node_value << "\n ";
+        if(p->left) {
+            std::cout << std::setw(indent) << ' ' <<" \\\n";
+            postorder(p->left, indent+4);
+        }
     }
 }
