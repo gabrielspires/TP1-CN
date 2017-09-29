@@ -26,6 +26,8 @@ const double cross_rate = 0.95,
 
 const bool use_elitism = true;
 
+extern int node_number;
+
 // enum Operator{ SUM, SUB, DIV, MUL, COS, SIN };
 const string operators[] = {"+", "-", "/", "*", "cos", "sin"};
 const string variables[] = {"x1" , "x2", "x3", "x4", "x5", "x6", "x7", "x8"};

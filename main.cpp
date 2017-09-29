@@ -20,17 +20,74 @@ int main(int argc, char const *argv[]){
 
     num_of_var = dataset_train[0].size() - 1;
 
-
-    // Individual *teste = new Individual(num_of_var);
-
-    // postorder(teste->genotype, 4);
-    // teste->printExpression(teste->genotype);
     generate_population(population, num_of_var);
     calc_fitness(population, dataset_train, num_of_var);
 
-    select(population);
-    select(population);
-    select(population);
+    //----------------------------------------------
+    
+    crossover(select(population), select(population), new_population);
+
+
+    // Tree* temp_tree;
+    // Individual *teste = new Individual(num_of_var);
+
+    //     // population[i] = teste;
+
+    //     teste->genotype = new Tree(true, num_of_var);
+    //     teste->genotype->node_value = "+";
+
+    //     teste->genotype->left = new Tree(num_of_var);
+    //     teste->genotype->left->node_value = "*";
+
+    //     teste->genotype->left->left = new Tree(num_of_var);
+    //     teste->genotype->left->left->node_value = "x4";
+    //     teste->genotype->left->right = new Tree(num_of_var);
+    //     teste->genotype->left->right->node_value = "x7";
+
+    //     teste->genotype->right = new Tree(num_of_var);
+    //     teste->genotype->right->node_value = "cos";
+    //     teste->genotype->right->right = new Tree(num_of_var);
+    //     teste->genotype->right->right->node_value = "x7";
+
+    //     postorder(teste->genotype, 0);
+    //     cout << "MAXDEPTH: " << teste->maxDepth(teste->genotype) << endl;
+    //     cout << "===================" << endl;
+
+    // Individual *teste2 = new Individual(num_of_var);
+
+    //     // population[i] = teste;
+
+    //     teste2->genotype = new Tree(true, num_of_var);
+    //     teste2->genotype->node_value = "+";
+
+    //     teste2->genotype->left = new Tree(num_of_var);
+    //     teste2->genotype->left->node_value = "*";
+
+    //     teste2->genotype->left->left = new Tree(num_of_var);
+    //     teste2->genotype->left->left->node_value = "30";
+    //     teste2->genotype->left->right = new Tree(num_of_var);
+    //     teste2->genotype->left->right->node_value = "12";
+
+    //     teste2->genotype->right = new Tree(num_of_var);
+    //     teste2->genotype->right->node_value = "sin";
+    //     teste2->genotype->right->right = new Tree(num_of_var);
+    //     teste2->genotype->right->right->node_value = "x3";
+
+    //     postorder(teste2->genotype, 0);
+    //     cout << "MAXDEPTH: " << teste2->maxDepth(teste2->genotype) << endl;
+    //     cout << "===================" << endl;
+
+
+    //     temp_tree = teste2->genotype->right;
+    //     teste2->genotype->right = teste->genotype->right;
+    //     teste->genotype->right = temp_tree;
+
+
+    //     postorder(teste->genotype, 0);
+    //     cout << "===================" << endl;
+    //     postorder(teste2->genotype, 0);
+    //     cout << "===================" << endl;
+
     
     // evolve(population, new_population);
 
@@ -52,5 +109,5 @@ int main(int argc, char const *argv[]){
         delete new_population[i];
     }
 
-    return 0;
+        return 0;
 }

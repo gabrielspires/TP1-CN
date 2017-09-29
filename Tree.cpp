@@ -7,9 +7,10 @@ class Tree{
 public:
     string node_value;
     Tree *left, *right;
-    int num_of_var;
+    int num_of_var, number;
 
     Tree(bool isRoot, int num_of_var){
+    	// this->node_number = 0;
     	this->num_of_var = num_of_var;
         // double node_type = (rand()%100)/100.0;
         /*if(node_type <= 0.90) */ this->generateOperator(isRoot);
@@ -19,6 +20,7 @@ public:
         this->left = this->right = NULL;
     }
     Tree(int num_of_var){
+    	// this->node_number = 0;
     	this->num_of_var = num_of_var;
         double node_type = (rand()%100)/100.0;
         if(node_type <= 0.60) this->generateOperator();
