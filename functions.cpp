@@ -33,7 +33,7 @@ void calc_fitness(vector <Individual*> &population, vector< vector<double> > dat
     double mean_squared_error;
     double fit_med = 0;
 
-    for (int i = 0; i < init_pop_size; i++){
+    for (int i = 0; i < population.size(); i++){
         mean_squared_error = 0;
         for (int j = 0; j < dataset_train.size(); j++){
             mean_squared_error += pow(population[i]->genotype->evaluate(population[i]->genotype, dataset_train[j]) - dataset_train[j][dataset_train[j].size()-1], 2);
@@ -85,6 +85,7 @@ Individual *select(vector <Individual*> &population){
     //Marca o indivíduo para não ser mais usado em torneios
     population[best_individual_index]->can_participate = false;
     selected_individual = population[best_individual_index];
+    // delete population[best_individual_index];
     population.erase(population.begin() + best_individual_index);
 
     return selected_individual;
@@ -102,7 +103,7 @@ Tree *select_random_node(Tree *parent_genotype, int rand_node_number){
 
     if (parent_genotype->left && return_node == NULL) return_node = select_random_node(parent_genotype->left, rand_node_number);
     if (parent_genotype->right && return_node == NULL) return_node = select_random_node(parent_genotype->right, rand_node_number);
-    return return_node; 
+    return return_node;
 }
 
 void swap_node(Tree &node1, Tree &node2){
@@ -128,26 +129,27 @@ void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &n
     // cout << "temp_node1=====================================\n";
     // postorder(temp_node2, 0);
     // cout << "temp_node2=====================================\n";
-    postorder(child1.genotype, 0);
-    cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
-    postorder(child2.genotype, 0);
-    cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
-    cout << "TROCA\n";
+    // postorder(child1.genotype, 0);
+    // cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
+    // postorder(child2.genotype, 0);
+    // cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
+    // cout << "TROCA\n";
 
-    postorder(temp_node1, 0);
-    cout << "temp_node1=====================================\n";
-    postorder(temp_node2, 0);
-    cout << "temp_node2=====================================\n";
+    // postorder(temp_node1, 0);
+    // cout << "temp_node1=====================================\n";
+    // postorder(temp_node2, 0);
+    // cout << "temp_node2=====================================\n";
 
     
     swap_node(*temp_node1, *temp_node2);
     child1.numerate_nodes(child1.genotype, "reset");
     child2.numerate_nodes(child2.genotype, "reset");
 
-    postorder(child1.genotype, 0);
-    cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
-    postorder(child2.genotype, 0);
-    cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
+
+    // postorder(child1.genotype, 0);
+    // cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
+    // postorder(child2.genotype, 0);
+    // cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
 
     // postorder(child1.genotype, 0);
     // cout << "=====================================\n";
@@ -155,42 +157,47 @@ void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &n
     // cout << "=====================================\n";
 
     /*
-        NÃO SEI COMO FAZ PRA TROCAR OS NÓS
-        PRECISO CRIAR UM FILHO PRA NAO MODIFICAR OS PAIS
-        MUTAR SÓ O FILHO
-
-        VERIFICAR SE TA TROCANDO OPERADOR COM OPERADOR, ETC
-        TA TUDO ERRADO ESSA BOSTA, ARRUMA AI CARA!!!
         ADICIONAR O GLOBAL ELITE
     */
 
-    // new_population.push_back(&child1);
-    // new_population.push_back(&child2);
+    new_population.push_back(&child1);
+    new_population.push_back(&child2);
 }
 
 //Mutate the DNA from the child to generate diversity
-Individual *mutate(Individual *child){
+void mutate(Individual *indiv, vector <Individual*> &new_population){
+    Tree *node_to_mutate = NULL;
+    do{
+        node_to_mutate = select_random_node(indiv->genotype, rand()%indiv->size(indiv->genotype));
+    }while(!node_to_mutate);
 
+    if (node_to_mutate->isOperator()) node_to_mutate->generateOperator();
+    if (node_to_mutate->isVariable()) node_to_mutate->generateVariable();
+    if (node_to_mutate->isTerminal()) node_to_mutate->generateTerminal();
+
+    new_population.push_back(indiv);
 }
 
 void evolve(vector <Individual*> &population, vector <Individual*> &new_population){
     Individual *parent1, *parent2, *child;
 
-    for (int i = 0; i < max_gen; i++){
-        parent1 = select(population);
-        parent2 = select(population);
+    for (int i = 0; i < init_pop_size/2 && !population.empty(); i++){
 
-        if((double(rand()%10)/10) <= 0.9){
-            // crossover(parent1, parent2, new_population);
+        if((double(rand()%10)/10) <= 0.8){
+            cout << "\tCROSSOVER" << endl;
+            parent1 = select(population);
+            parent2 = select(population);
+            crossover(parent1, parent2, new_population);
             // mutate(child);
         }
         else{
-            // mutate(parent1);
+            cout << "\tMUTATION" << endl;
+            parent1 = select(population);
+            mutate(parent1, new_population);
             // mutate(parent2);
         }
 
         //Add the child to the new population
-        new_population.push_back(child);
     }
 }
 

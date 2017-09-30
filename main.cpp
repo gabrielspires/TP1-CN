@@ -25,33 +25,33 @@ int main(int argc, char const *argv[]){
 
     //----------------------------------------------
     
-    crossover(select(population), select(population), new_population);
-
 
     // Tree* temp_tree;
     // Individual *teste = new Individual(num_of_var);
 
-    //     // population[i] = teste;
+        // population[i] = teste;
 
-    //     teste->genotype = new Tree(true, num_of_var);
-    //     teste->genotype->node_value = "+";
+        // teste->genotype = new Tree(true, num_of_var);
+        // teste->genotype->node_value = "+";
 
-    //     teste->genotype->left = new Tree(num_of_var);
-    //     teste->genotype->left->node_value = "*";
+        // teste->genotype->left = new Tree(num_of_var);
+        // teste->genotype->left->node_value = "*";
 
-    //     teste->genotype->left->left = new Tree(num_of_var);
-    //     teste->genotype->left->left->node_value = "x4";
-    //     teste->genotype->left->right = new Tree(num_of_var);
-    //     teste->genotype->left->right->node_value = "x7";
+        // teste->genotype->left->left = new Tree(num_of_var);
+        // teste->genotype->left->left->node_value = "x4";
+        // teste->genotype->left->right = new Tree(num_of_var);
+        // teste->genotype->left->right->node_value = "x7";
 
-    //     teste->genotype->right = new Tree(num_of_var);
-    //     teste->genotype->right->node_value = "cos";
-    //     teste->genotype->right->right = new Tree(num_of_var);
-    //     teste->genotype->right->right->node_value = "x7";
+        // teste->genotype->right = new Tree(num_of_var);
+        // teste->genotype->right->node_value = "cos";
+        // teste->genotype->right->right = new Tree(num_of_var);
+        // teste->genotype->right->right->node_value = "x7";
 
-    //     postorder(teste->genotype, 0);
-    //     cout << "MAXDEPTH: " << teste->maxDepth(teste->genotype) << endl;
-    //     cout << "===================" << endl;
+        // postorder(teste->genotype, 0);
+        // cout << "MAXDEPTH: " << teste->maxDepth(teste->genotype) << endl;
+        // cout << "===================" << endl;
+        // mutate(teste);
+        // postorder(teste->genotype, 0);
 
     // Individual *teste2 = new Individual(num_of_var);
 
@@ -87,9 +87,17 @@ int main(int argc, char const *argv[]){
     //     cout << "===================" << endl;
     //     postorder(teste2->genotype, 0);
     //     cout << "===================" << endl;
-
-    
+    cout << "PopSize: " << population.size() << endl;
+    cout << "NewPopSize: " << new_population.size() << endl;
     // evolve(population, new_population);
+    new_population.push_back(population[0]);
+    new_population.push_back(population[1]);
+    cout << "PopSize: " << population.size() << endl;
+    cout << "NewPopSize: " << new_population.size() << endl;
+
+    postorder(population[1]->genotype, 0);
+
+    // calc_fitness(new_population, dataset_train, num_of_var);
 
 
     // for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " "; cout << endl;
@@ -105,9 +113,9 @@ int main(int argc, char const *argv[]){
     for (int i = 0; i < population.size(); i++){
         delete population[i];
     }
-    for (int i = 0; i < new_population.size(); i++){
-        delete new_population[i];
-    }
+    // for (int i = 0; i < new_population.size(); i++){
+    //     delete new_population[i];
+    // }
 
         return 0;
 }
