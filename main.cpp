@@ -24,7 +24,6 @@ int main(int argc, char const *argv[]){
     calc_fitness(population, dataset_train, num_of_var);
 
     //----------------------------------------------
-    
 
     // Tree* temp_tree;
     // Individual *teste = new Individual(num_of_var);
@@ -89,13 +88,17 @@ int main(int argc, char const *argv[]){
     //     cout << "===================" << endl;
     cout << "PopSize: " << population.size() << endl;
     cout << "NewPopSize: " << new_population.size() << endl;
-    // evolve(population, new_population);
-    new_population.push_back(population[0]);
-    new_population.push_back(population[1]);
+    evolve(population, new_population);
+    // new_population.push_back(population[0]);
+    // new_population.push_back(population[1]);
     cout << "PopSize: " << population.size() << endl;
     cout << "NewPopSize: " << new_population.size() << endl;
 
-    postorder(population[1]->genotype, 0);
+    for(int i = 0; i< new_population.size(); i++){
+        postorder(new_population[i]->genotype, 0);
+        cout << "==============\n";
+    }
+    calc_fitness(new_population, dataset_train, num_of_var);
 
     // calc_fitness(new_population, dataset_train, num_of_var);
 
@@ -113,9 +116,9 @@ int main(int argc, char const *argv[]){
     for (int i = 0; i < population.size(); i++){
         delete population[i];
     }
-    // for (int i = 0; i < new_population.size(); i++){
-    //     delete new_population[i];
-    // }
+    for (int i = 0; i < new_population.size(); i++){
+        delete new_population[i];
+    }
 
         return 0;
 }

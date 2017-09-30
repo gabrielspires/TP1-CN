@@ -114,54 +114,21 @@ void swap_node(Tree &node1, Tree &node2){
 
 //Combine DNA from both parents to create a new individual
 void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &new_population){
-    // Individual *child1 = NULL, *child2 = NULL;
-    Individual child1 = *parent1, child2 = *parent2;
     Tree *temp_node1 = NULL, *temp_node2 = NULL;
-    // int rand_node_number;
-    //Selecionar um nó aleatorio da arvore
-    //Trocar nó ou então sub-arvore
-    //Retornar novo individuo
 
-    temp_node1 = select_random_node(child1.genotype, rand()%child1.size(child1.genotype));
-    temp_node2 = select_random_node(child2.genotype, rand()%child2.size(child2.genotype));
-
-    // postorder(temp_node1, 0);
-    // cout << "temp_node1=====================================\n";
-    // postorder(temp_node2, 0);
-    // cout << "temp_node2=====================================\n";
-    // postorder(child1.genotype, 0);
-    // cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
-    // postorder(child2.genotype, 0);
-    // cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
-    // cout << "TROCA\n";
-
-    // postorder(temp_node1, 0);
-    // cout << "temp_node1=====================================\n";
-    // postorder(temp_node2, 0);
-    // cout << "temp_node2=====================================\n";
-
+    temp_node1 = select_random_node(parent1->genotype, rand()%parent1->size(parent1->genotype));
+    temp_node2 = select_random_node(parent2->genotype, rand()%parent2->size(parent2->genotype));
     
     swap_node(*temp_node1, *temp_node2);
-    child1.numerate_nodes(child1.genotype, "reset");
-    child2.numerate_nodes(child2.genotype, "reset");
-
-
-    // postorder(child1.genotype, 0);
-    // cout << "child1===================================== SIZE: " << child1.size(child1.genotype) << endl;
-    // postorder(child2.genotype, 0);
-    // cout << "child2===================================== SIZE: " << child2.size(child2.genotype) << endl;
-
-    // postorder(child1.genotype, 0);
-    // cout << "=====================================\n";
-    // postorder(child2.genotype, 0);
-    // cout << "=====================================\n";
+    parent1->numerate_nodes(parent1->genotype, "reset");
+    parent2->numerate_nodes(parent2->genotype, "reset");
 
     /*
         ADICIONAR O GLOBAL ELITE
     */
 
-    new_population.push_back(&child1);
-    new_population.push_back(&child2);
+    new_population.push_back(parent1);
+    new_population.push_back(parent2);
 }
 
 //Mutate the DNA from the child to generate diversity
@@ -178,21 +145,40 @@ void mutate(Individual *indiv, vector <Individual*> &new_population){
     new_population.push_back(indiv);
 }
 
+void keep_the_elite(vector <Individual*> &population, vector <Individual*> &new_population){
+    double best_fitness = (1.0/0.0); //INF
+    int elite_index;
+
+    for (int i = 0; i < population.size(); ++i){
+        if (population[i]->fitness < best_fitness){
+            best_fitness = population[i]->fitness;
+            elite_index = i;
+        }
+    }
+                                                        //excluir o elite!?!??!?!?!?!?
+    new_population.push_back(population[elite_index]);
+}
+
 void evolve(vector <Individual*> &population, vector <Individual*> &new_population){
     Individual *parent1, *parent2, *child;
 
-    for (int i = 0; i < init_pop_size/2 && !population.empty(); i++){
+    // keep_the_elite(population, new_population);
 
-        if((double(rand()%10)/10) <= 0.8){
+    cout << init_pop_size << " - " << population.size() << " - " << new_population.size() << endl;
+
+                                                                        //problema no init_pop_size/2
+    for (int i = 0; i < init_pop_size/2 /*&& !population.empty()*/; i++){
+
+        if((double(rand()%100)/100) <= cross_rate){
             cout << "\tCROSSOVER" << endl;
-            parent1 = select(population);
-            parent2 = select(population);
+            parent1 = select(population); //Tournament
+            parent2 = select(population); //Tournament
             crossover(parent1, parent2, new_population);
             // mutate(child);
         }
         else{
             cout << "\tMUTATION" << endl;
-            parent1 = select(population);
+            parent1 = select(population); //Tournament
             mutate(parent1, new_population);
             // mutate(parent2);
         }
