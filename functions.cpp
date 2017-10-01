@@ -31,64 +31,52 @@ void generate_population(vector <Individual*> &population, int num_of_var){
 
 void calc_fitness(vector <Individual*> &population, vector< vector<double> > dataset_train, int num_of_var){
     double mean_squared_error;
-    double fit_med = 0;
-
+    
     for (int i = 0; i < population.size(); i++){
         mean_squared_error = 0;
         for (int j = 0; j < dataset_train.size(); j++){
             mean_squared_error += pow(population[i]->genotype->evaluate(population[i]->genotype, dataset_train[j]) - dataset_train[j][dataset_train[j].size()-1], 2);
         }
 
+        population[i]->can_participate = true; //Reset individual to participate in tournament
         population[i]->fitness = sqrt(mean_squared_error/dataset_train.size());
-cout << "Fitness " << i << ": " << population[i]->fitness << endl;
-fit_med += sqrt(mean_squared_error/dataset_train.size());
+        // cout << "Fitness " << i << ": " << population[i]->fitness << endl;
 
         // cout << "Resultado: " << population[i]->genotype->evaluate(population[i]->genotype, dataset_train[40]) << " Expressão: ";
         // population[i]->printExpression(population[i]->genotype);
         // cout << endl << endl;
     }
-
-cout << "Fitness media: " << fit_med/init_pop_size << endl;
 }
 
 //##############################################//
 //Select the best of X individuals by tournament
 Individual *select(vector <Individual*> &population){
-    int best_individual_index = 0, rand_index = 0, i= 0;
-    double best_individual_fitness = (1.0/0.0); //INF
-    vector<int> v;
-    Individual *selected_individual;
+    std::vector<int> selected_indexes;
+    int index, i = 0, best_index;
+    double best_fitness = (1.0/0.0);
+    Individual *tourn_winner;
 
-    if (population.empty()) return selected_individual;
-
-    if (population.size() < tourn_size)
-        i = tourn_size - population.size();
-
-    for (; i < tourn_size; i++){
-        //Escolhe um índice aleatório e continua
-        //escolhendo caso o indivíduo não possa ser escolhido
-        do{
-            rand_index = rand()%population.size();
-        }while(population[rand_index]->can_participate == false || find(v.begin(), v.end(), rand_index) != v.end());
-        v.push_back(rand_index);
-
-        cout << "Selected Individual #" << rand_index << " with fitness of: " << population[rand_index]->fitness << endl;
-        // cout << population[rand_index]->fitness << " " << best_individual_fitness;
-
-        if (population[rand_index]->fitness < best_individual_fitness){
-            best_individual_index = rand_index;
-            best_individual_fitness = population[rand_index]->fitness;
+    //Select random indexes from the population
+    if (population.size() < tourn_size) i = tourn_size -population.size();
+    while(i < tourn_size){
+        index = rand()%population.size();
+        if(find(begin(selected_indexes), end(selected_indexes), index) == selected_indexes.end()){
+        // cout << index << endl;
+            i++;
+            selected_indexes.push_back(index);
         }
     }
-    cout << "Winner Individual is: #" << best_individual_index << endl;
-    
-    //Marca o indivíduo para não ser mais usado em torneios
-    population[best_individual_index]->can_participate = false;
-    selected_individual = population[best_individual_index];
-    // delete population[best_individual_index];
-    population.erase(population.begin() + best_individual_index);
 
-    return selected_individual;
+    for (int j = 0; j < selected_indexes.size(); j++){
+        if (population[selected_indexes[j]]->fitness < best_fitness){
+            best_fitness = population[selected_indexes[j]]->fitness;
+            best_index = selected_indexes[j];
+        }
+    }
+    tourn_winner = population[best_index];
+
+    population.erase(population.begin() + best_index);
+    return tourn_winner;
 }
 
 //###################################################
@@ -115,6 +103,7 @@ void swap_node(Tree &node1, Tree &node2){
 //Combine DNA from both parents to create a new individual
 void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &new_population){
     Tree *temp_node1 = NULL, *temp_node2 = NULL;
+    double prob;
 
     temp_node1 = select_random_node(parent1->genotype, rand()%parent1->size(parent1->genotype));
     temp_node2 = select_random_node(parent2->genotype, rand()%parent2->size(parent2->genotype));
@@ -123,9 +112,14 @@ void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &n
     parent1->numerate_nodes(parent1->genotype, "reset");
     parent2->numerate_nodes(parent2->genotype, "reset");
 
-    /*
-        ADICIONAR O GLOBAL ELITE
-    */
+    prob = (rand()%100)/100.0;
+
+    if(prob <= mut_rate){
+        // cout << "\tMUTATION" << endl;
+        mutate(parent1, new_population);
+        mutate(parent2, new_population);
+    }
+
 
     new_population.push_back(parent1);
     new_population.push_back(parent2);
@@ -134,15 +128,17 @@ void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &n
 //Mutate the DNA from the child to generate diversity
 void mutate(Individual *indiv, vector <Individual*> &new_population){
     Tree *node_to_mutate = NULL;
-    do{
+    // do{
         node_to_mutate = select_random_node(indiv->genotype, rand()%indiv->size(indiv->genotype));
-    }while(!node_to_mutate);
+    // }while(!node_to_mutate);
 
-    if (node_to_mutate->isOperator()) node_to_mutate->generateOperator();
-    if (node_to_mutate->isVariable()) node_to_mutate->generateVariable();
-    if (node_to_mutate->isTerminal()) node_to_mutate->generateTerminal();
-
-    new_population.push_back(indiv);
+    // if (node_to_mutate->isOperator()) node_to_mutate->generateOperator();
+    // if (node_to_mutate->isVariable()) node_to_mutate->generateVariable();
+    // if (node_to_mutate->isTerminal()) node_to_mutate->generateTerminal();
+    node_to_mutate->left = NULL;
+    node_to_mutate->right = NULL;
+    indiv->generateGenotype(node_to_mutate);
+    indiv->numerate_nodes(indiv->genotype, "reset");
 }
 
 void keep_the_elite(vector <Individual*> &population, vector <Individual*> &new_population){
@@ -155,35 +151,35 @@ void keep_the_elite(vector <Individual*> &population, vector <Individual*> &new_
             elite_index = i;
         }
     }
+
+    // Individual *elite = new Individual(*population[elite_index]);
                                                         //excluir o elite!?!??!?!?!?!?
     new_population.push_back(population[elite_index]);
+    // new_population.push_back(elite);
+    population.erase(population.begin() + elite_index);
 }
 
 void evolve(vector <Individual*> &population, vector <Individual*> &new_population){
     Individual *parent1, *parent2, *child;
+    double prob;
 
-    // keep_the_elite(population, new_population);
+    keep_the_elite(population, new_population);
 
-    cout << init_pop_size << " - " << population.size() << " - " << new_population.size() << endl;
+    // cout << init_pop_size << " - " << population.size() << " - " << new_population.size() << endl;
 
                                                                         //problema no init_pop_size/2
-    for (int i = 0; i < init_pop_size/2 /*&& !population.empty()*/; i++){
-
-        if((double(rand()%100)/100) <= cross_rate){
-            cout << "\tCROSSOVER" << endl;
+    // for (int i = 0; i < init_pop_size /*&& !population.empty()*/; i++){
+    while(population.size() > 0){
+        prob = (rand()%100)/100.0;
+        if(prob <= cross_rate && population.size() > 1){
+            // cout << "\tCROSSOVER" << endl;
             parent1 = select(population); //Tournament
             parent2 = select(population); //Tournament
             crossover(parent1, parent2, new_population);
-            // mutate(child);
-        }
-        else{
-            cout << "\tMUTATION" << endl;
+        }else{ //Reproduction
             parent1 = select(population); //Tournament
-            mutate(parent1, new_population);
-            // mutate(parent2);
+            new_population.push_back(parent1);
         }
-
-        //Add the child to the new population
     }
 }
 

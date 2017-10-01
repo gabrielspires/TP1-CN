@@ -27,6 +27,15 @@ public:
         // delete this->genotype;
     };
 
+    Individual(const Individual &obj){
+    	this->node_number = obj.node_number;
+    	this->can_participate = obj.can_participate;
+    	this->fitness = obj.fitness;
+    	this->num_of_var = obj.num_of_var;
+        this->ind_size = obj.ind_size;
+        this->depth = obj.depth;
+    }
+
     void generateGenotype(Tree *node){
         // cout << "IND SIZE: " << this->ind_size << endl;
         if(this->ind_size >= ind_max_size && !node->isOperator()) return;
@@ -101,7 +110,6 @@ public:
 	}
 
     // Tree node;
-private:
     void deleteTree(Tree *node) {    
         if (!node) return;
         if(node->left) deleteTree(node->left);
@@ -109,6 +117,7 @@ private:
 
         delete node;
     }
+private:
 };
 
 #endif //INDIVIDUAL_CPP

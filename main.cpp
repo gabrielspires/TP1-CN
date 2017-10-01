@@ -20,105 +20,83 @@ int main(int argc, char const *argv[]){
 
     num_of_var = dataset_train[0].size() - 1;
 
-    generate_population(population, num_of_var);
-    calc_fitness(population, dataset_train, num_of_var);
+    cout << "Ind. max size:   " << ind_max_size << endl
+             << "Init. pop. size: " << init_pop_size << endl
+             << "Max. pop. size:  " << max_pop_size << endl
+             << "Tournament size: " << tourn_size << endl
+             << "Max. num. gen.:  " << max_gen << endl
+             << "Crossover rate:  " << cross_rate << endl
+             << "Mutation rate:   " << mut_rate << endl;
 
-    //----------------------------------------------
+    cout << "Min Fitness:  " << "\t Mean Fitness: " << "\t Max Fitness:  " << endl;
 
-    // Tree* temp_tree;
-    // Individual *teste = new Individual(num_of_var);
+    double min_fitness = (1.0/0.0);
+    double max_fitness = 0;
+    double mean_fitness = 0;
 
-        // population[i] = teste;
+    double global_min_fitness = 0;
+    double global_max_fitness = 0;
+    double global_mean_fitness = 0;
 
-        // teste->genotype = new Tree(true, num_of_var);
-        // teste->genotype->node_value = "+";
+    // for (int k = 0; k < num_runs; ++k){
 
-        // teste->genotype->left = new Tree(num_of_var);
-        // teste->genotype->left->node_value = "*";
+        generate_population(population, num_of_var);
 
-        // teste->genotype->left->left = new Tree(num_of_var);
-        // teste->genotype->left->left->node_value = "x4";
-        // teste->genotype->left->right = new Tree(num_of_var);
-        // teste->genotype->left->right->node_value = "x7";
+        /*
+            OLHAR SE O QUE TA INDO PRA NEW_POPULATION É
+            PONTEIRO PRO QUE TA EM POPULATION
+        */
 
-        // teste->genotype->right = new Tree(num_of_var);
-        // teste->genotype->right->node_value = "cos";
-        // teste->genotype->right->right = new Tree(num_of_var);
-        // teste->genotype->right->right->node_value = "x7";
+        for (int i = 0; i < max_gen && population.size() < max_pop_size; ++i){
+            min_fitness = (1.0/0.0);
+            max_fitness = 0;
+            mean_fitness = 0;
 
-        // postorder(teste->genotype, 0);
-        // cout << "MAXDEPTH: " << teste->maxDepth(teste->genotype) << endl;
-        // cout << "===================" << endl;
-        // mutate(teste);
-        // postorder(teste->genotype, 0);
+            calc_fitness(population, dataset_train, num_of_var);
+            evolve(population, new_population);
 
-    // Individual *teste2 = new Individual(num_of_var);
+            for (int j = 0; j < population.size(); j++){
+                if(population[j]) delete population[j];
+            }
 
-    //     // population[i] = teste;
+            population.swap(new_population);
 
-    //     teste2->genotype = new Tree(true, num_of_var);
-    //     teste2->genotype->node_value = "+";
+            for (int j = 0; j < population.size(); j++){
+                // population[j]->numerate_nodes(population[j]->genotype, "reset");
+                if (population[j]->fitness < min_fitness){
+                    min_fitness = population[j]->fitness;
+                }
 
-    //     teste2->genotype->left = new Tree(num_of_var);
-    //     teste2->genotype->left->node_value = "*";
+                if(population[j]->fitness > max_fitness){
+                    max_fitness = population[j]->fitness;
+                }
+                mean_fitness += population[j]->fitness;
+            }
+            mean_fitness = mean_fitness/population.size();
 
-    //     teste2->genotype->left->left = new Tree(num_of_var);
-    //     teste2->genotype->left->left->node_value = "30";
-    //     teste2->genotype->left->right = new Tree(num_of_var);
-    //     teste2->genotype->left->right->node_value = "12";
+            new_population.clear();
+            cout << i << setw(10) << min_fitness
+                 << "     \t" << setw(10) <<  mean_fitness
+                 << "     \t" << setw(10) << max_fitness << endl;
+        }    
+        population.clear();
+        global_min_fitness += min_fitness/num_runs;
+        global_mean_fitness += mean_fitness/num_runs;
+        global_max_fitness += max_fitness/num_runs;
+    // }
+    // cout << "Global stats:" << endl;
+    // cout << global_min_fitness
+    //      << "     \t" << global_mean_fitness
+    //      << "     \t" << global_max_fitness << endl;
 
-    //     teste2->genotype->right = new Tree(num_of_var);
-    //     teste2->genotype->right->node_value = "sin";
-    //     teste2->genotype->right->right = new Tree(num_of_var);
-    //     teste2->genotype->right->right->node_value = "x3";
-
-    //     postorder(teste2->genotype, 0);
-    //     cout << "MAXDEPTH: " << teste2->maxDepth(teste2->genotype) << endl;
-    //     cout << "===================" << endl;
-
-
-    //     temp_tree = teste2->genotype->right;
-    //     teste2->genotype->right = teste->genotype->right;
-    //     teste->genotype->right = temp_tree;
-
-
-    //     postorder(teste->genotype, 0);
-    //     cout << "===================" << endl;
-    //     postorder(teste2->genotype, 0);
-    //     cout << "===================" << endl;
-    cout << "PopSize: " << population.size() << endl;
-    cout << "NewPopSize: " << new_population.size() << endl;
-    evolve(population, new_population);
-    // new_population.push_back(population[0]);
-    // new_population.push_back(population[1]);
-    cout << "PopSize: " << population.size() << endl;
-    cout << "NewPopSize: " << new_population.size() << endl;
-
-    for(int i = 0; i< new_population.size(); i++){
-        postorder(new_population[i]->genotype, 0);
-        cout << "==============\n";
-    }
-    calc_fitness(new_population, dataset_train, num_of_var);
-
-    // calc_fitness(new_population, dataset_train, num_of_var);
-
-
-    // for(int j=0; j < dataset_train[0].size()-1; j++) cout << "x" << j+1 << ":" << dataset_train[40][j] << " "; cout << endl;
-
-    // cout << "Y = " << dataset_train[0][dataset_train[0].size()-1] << endl;
-    
-    //Calculo do Fitness de cada indivíduo
-
-    // cout << "# of OP: " << num_of_op << endl;
-    // cout << "# of VAR: " << num_of_var << endl;
 
     //Free population from memory
-    for (int i = 0; i < population.size(); i++){
-        delete population[i];
-    }
-    for (int i = 0; i < new_population.size(); i++){
-        delete new_population[i];
-    }
+    // for (int i = 0; i < population.size(); i++){
+    //     if(population[i]) delete population[i];
+    // }
+    // for (int i = 0; i < new_population.size(); i++){
+        // if(new_population[i]) delete new_population[i];
+    // }
 
-        return 0;
+    return 0;
 }

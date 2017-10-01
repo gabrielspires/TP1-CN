@@ -17,7 +17,7 @@ void calc_fitness(vector <Individual*> &, vector< vector<double> > , int );
 
 Individual* select(vector <Individual*> &);
 
-void mutate(Individual *indiv);
+void mutate(Individual *indiv, vector <Individual*> &new_population);
 
 void crossover(Individual *parent1, Individual *parent2, vector <Individual*> &new_population);
 

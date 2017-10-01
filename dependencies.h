@@ -16,15 +16,16 @@
 using namespace std;
 
 const int ind_max_size = 7,
-	    init_pop_size = 20,
-	    max_pop_size = 500,
-	    tourn_size = 5,
-	    max_gen = 20;
+	      	max_pop_size = 500,
+	      		 max_gen = 250,
+	       init_pop_size = 50,
+	      tourn_size = 2,
+	      num_runs = 30;
 
-const double cross_rate = 0.30,
+const double cross_rate = 0.90,
        		 mut_rate = 1-cross_rate;
 
-const bool use_elitism = true;
+const double elitism_rate = 0.10;
 
 extern int node_number;
 

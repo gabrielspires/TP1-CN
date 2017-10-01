@@ -123,8 +123,8 @@ public:
         return terminal_value;
 	}
 
-    // ~Tree(){
-    // }
+    ~Tree(){
+    }
     
     
     
