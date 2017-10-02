@@ -144,14 +144,48 @@ fitness
 \emph default
  dos indivíduos da população para que operações genéticas sejam feitas sobre
  eles.
- À medida que indivíduos bons são encontrados, esses indivíduos são mantidos
- na população seguinte para que sua qualidade seja passada para as próximas
- gerações.
+ 
+\end_layout
+
+\begin_layout Standard
+À medida que indivíduos bons são encontrados, esses indivíduos são mantidos
+ na população seguinte para que sua 
+\begin_inset Quotes eld
+\end_inset
+
+qualidade
+\begin_inset Quotes erd
+\end_inset
+
+ seja passada adiante.
  Este procedimento é chamado de 
 \emph on
 elitismo
 \emph default
- 
+.
+ Novos indivíduos são gerados através de cruzamento ou mutação.
+ No caso do cruzamento 2 
+\begin_inset Quotes eld
+\end_inset
+
+pais
+\begin_inset Quotes erd
+\end_inset
+
+ são selecionados para dar origem a dois novos indivíduos.
+ Essa seleção é feita por meio de torneio, onde um número de indivíduos
+ da população é selecionado ao acaso e estes indivíduos competem entre si,
+ o indivíduo com o melhor fitness é então selecionado como vencedor e é
+ usado no cruzamento.
+ Na mutação, um dos filhos gerados pelo cruzamento tem uma chance de ter
+ sua árvore alterada por redução, expansão ou então ter apenas um nó alterado,
+ o que gera mais diversidade na população, uma vez que as possíveis soluções
+ não ficam presas à diversidade criada na geração da população inicial.
+\end_layout
+
+\begin_layout Standard
+Depois que uma nova população é criada, o processo é aplicado à ela e às
+ gerações seguintes até que se chegue em um critério de parada.
 \end_layout
 
 \begin_layout Section
@@ -174,12 +208,12 @@ Os indivíduos são representados como árvores, sendo que os nós internos
 fechamento
 \emph default
 .
- 
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status collapsed
@@ -214,6 +248,10 @@ Indivíduo que representa a expressão
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Os indivíduos foram implementados em uma classe
 \end_layout
 
 \begin_layout Section

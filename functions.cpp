@@ -160,9 +160,27 @@ void keep_the_elite(vector <Individual*> &population, vector <Individual*> &new_
     // population.erase(population.begin() + elite_index);
 }
 
+void remove_worst(vector <Individual*> &population){
+    double max_fitness = 0;
+    int worst_index;
+
+    for (int i = 0; i < population.size(); ++i){
+        if (population[i]->fitness > max_fitness){
+            max_fitness = population[i]->fitness;
+            worst_index = i;
+        }
+    }
+
+    population.erase(population.begin() + worst_index);
+}
+
 void evolve(vector <Individual*> &population, vector <Individual*> &new_population){
-    Individual *parent1, *parent2, *child;
+    Individual *parent1, *parent2/*, *child*/;
     double prob;
+    
+    if (population.size() == max_pop_size-1){
+        remove_worst(population);
+    }
 
     keep_the_elite(population, new_population);
 
