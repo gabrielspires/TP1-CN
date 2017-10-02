@@ -434,6 +434,133 @@ s e trocados entre eles.
 Experimentos
 \end_layout
 
+\begin_layout Itemize
+Máximo tamanho do indivíduo: 7 
+\end_layout
+
+\begin_layout Itemize
+Tamanho da população inicial: 50 
+\end_layout
+
+\begin_layout Itemize
+Tamanho máximo da população: 350 
+\end_layout
+
+\begin_layout Itemize
+Tamanho do torneio: 2 
+\end_layout
+
+\begin_layout Itemize
+Número máximo de gerações: 300 
+\end_layout
+
+\begin_layout Itemize
+Taxa de crossover: 0.95 
+\end_layout
+
+\begin_layout Itemize
+Taxa de mutação: 0.05
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename saida_keij7_med_30_runs_test.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Keijzer 7 - média de 30 execuções
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename saida_keij10_med_30_runs_test.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+saida_keij10_med_30_runs_test
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+saida_house_med
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Conclusões
 \end_layout
