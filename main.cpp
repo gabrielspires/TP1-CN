@@ -93,20 +93,6 @@ int main(int argc, char const *argv[]){
              << setw(10) << med_fits[i]/num_runs << " "
              << setw(10) << max_fits[i]/num_runs << endl;
     }
-    
-    // cout << "Global stats:" << endl;
-    // cout << global_min_fitness
-    //      << "     \t" << global_mean_fitness
-    //      << "     \t" << global_max_fitness << endl;
-
-
-    //Free population from memory
-    // for (int i = 0; i < population.size(); i++){
-    //     if(population[i]) delete population[i];
-    // }
-    // for (int i = 0; i < new_population.size(); i++){
-        // if(new_population[i]) delete new_population[i];
-    // }
 
     return 0;
 }

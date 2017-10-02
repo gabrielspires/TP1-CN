@@ -16,7 +16,7 @@
 using namespace std;
 
 const int ind_max_size = 7,
-	      		 max_gen = 30,
+	      		 max_gen = 100,
 	       init_pop_size = 10,
 	      	max_pop_size = 50,
 	      tourn_size = 2,

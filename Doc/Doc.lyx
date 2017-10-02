@@ -377,10 +377,57 @@ generateGenotype
 \end_layout
 
 \begin_layout Standard
-Depois de gerar toda a população inicial, a fitness é calculada na função
- 
+Depois de gerar toda a população inicial, a fitness de cada indivíduo é
+ calculada na função 
 \emph on
 calc_fitness
+\emph default
+ de acordo com a fórmula da raiz quadrada do erro quadrático médio (RMSE)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(Ind)=\sqrt{\frac{1}{N}\mathop{\sum_{_{i=1}}^{N}(Eval(Ind,x)-y)^{2}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Com a fitness da população calculada, usamos a função 
+\emph on
+evolve
+\emph default
+ para criar uma nova população a partir da atual.
+ Nessa função verificamos se a população atingiu o limite de indivíduos,
+ se sim a função 
+\emph on
+remove_worst
+\emph default
+ é chamada para remover o indivíduo com a pior fitness da população.
+ Após isso a função 
+\emph on
+keep_the_elite
+\emph default
+ é chamada e faz o inverso da função anterior, salvando e enviando para
+ a próxima população o indivíduo com a melhor fitness da população atual.
+\end_layout
+
+\begin_layout Standard
+Depois de manter o elite, rodamos um loop até que a população esteja vazia.
+ Nesse loop temos uma chance de chamar o crossover e uma chance de simplesmente
+ reproduzir o indivíduo, No crossover, 2 indivíduos são selecionados por
+ um torneio de tamanho 2 e são usados como pais.
+ Com os pais selecionados, nós aleatórios das árvores de cada um são selecionado
+s e trocados entre eles.
+ Após fazer o cruzamento, existe uma probabilidade de que os filhos sofram
+ uma mutação, nessa mutação um ou mais nós da árvore do indivíduo são alterados
+ aleatoriamente, gerando mais diversidade na população.
+ Caso o crossover não seja feito, algum indivíduo da população é jogado
+ para a próxima população sem ser alterado.
 \end_layout
 
 \begin_layout Section
