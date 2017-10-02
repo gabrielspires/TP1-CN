@@ -152,11 +152,12 @@ void keep_the_elite(vector <Individual*> &population, vector <Individual*> &new_
         }
     }
 
-    // Individual *elite = new Individual(*population[elite_index]);
+    Individual *elite = new Individual(*population[elite_index]);
+    // elite->numerate_nodes(elite->genotype);
                                                         //excluir o elite!?!??!?!?!?!?
-    new_population.push_back(population[elite_index]);
-    // new_population.push_back(elite);
-    population.erase(population.begin() + elite_index);
+    // new_population.push_back(population[elite_index]);
+    new_population.push_back(elite);
+    // population.erase(population.begin() + elite_index);
 }
 
 void evolve(vector <Individual*> &population, vector <Individual*> &new_population){

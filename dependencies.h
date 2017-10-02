@@ -16,13 +16,13 @@
 using namespace std;
 
 const int ind_max_size = 7,
-	      	max_pop_size = 500,
-	      		 max_gen = 250,
+	      		 max_gen = 300,
 	       init_pop_size = 50,
+	      	max_pop_size = max_gen+init_pop_size,
 	      tourn_size = 2,
 	      num_runs = 30;
 
-const double cross_rate = 0.90,
+const double cross_rate = 0.95,
        		 mut_rate = 1-cross_rate;
 
 const double elitism_rate = 0.10;

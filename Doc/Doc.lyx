@@ -10,7 +10,7 @@
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language brazilian
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -85,44 +85,146 @@
 \begin_body
 
 \begin_layout Title
-
-\lang brazilian
-Trabalho Prático 1 - Programação Genética
+TP 1 - Regressão Simbólica com Programação Genética
 \end_layout
 
 \begin_layout Author
-
-\lang brazilian
 Gabriel Henrique Souto Pires {gabrielpires@dcc.ufmg.br}
 \end_layout
 
-\begin_layout Section
+\begin_layout Date
+Computação Natural - 2/2017 
+\begin_inset Newline linebreak
+\end_inset
 
-\lang brazilian
+Departamento de Ciência da Computação
+\begin_inset Newline linebreak
+\end_inset
+
+Universidade Federal de Minas Gerais
+\end_layout
+
+\begin_layout Abstract
+
+\emph on
+Regressão simbólica é um dos problemas mais conhecidos em Programação Genética.
+ É comumente usado como um problema de ajuste para novos algoritmos, mas
+ também é amplamente usado em casos onde outros métodos de regressão podem
+ não ser ideais.
+ É conceptualmente um problema simples, e portanto é uma boa forma de se
+ introduzir programação genética.
+ Este documento tem como objetivo analisar, discutir e apresentar este problema,
+ assim como formas de resolvê-lo através de programação genética.
+ Serão apresentados detalhes da implementação, assim como experimentos feitos
+ nas bases de dados fornecidas à fim de concluir como a programação genética
+ é útil na resolução desse tipo de problema.
+\end_layout
+
+\begin_layout Section
 Introdução
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+O problema de regressão simbólica consiste em encontrar uma expressão matemática
+ que melhor descreve uma relação dada por um conjunto de valores.
+ Começamos construindo uma população de fórmulas geradas de forma aleatória
+ para representar uma relação entre variáveis independentes conhecidas e
+ uma parte dependente destas variáveis.
+ Cada geração de 
+\begin_inset Quotes eld
+\end_inset
 
-\lang brazilian
-Implementação
+funções
+\begin_inset Quotes erd
+\end_inset
+
+ é então evoluída da geração que veio antes dela selecionando a 
+\emph on
+fitness
+\emph default
+ dos indivíduos da população para que operações genéticas sejam feitas sobre
+ eles.
+ À medida que indivíduos bons são encontrados, esses indivíduos são mantidos
+ na população seguinte para que sua qualidade seja passada para as próximas
+ gerações.
+ Este procedimento é chamado de 
+\emph on
+elitismo
+\emph default
+ 
 \end_layout
 
 \begin_layout Section
+Implementação
+\end_layout
 
-\lang brazilian
+\begin_layout Standard
+Os indivíduos são representados como árvores, sendo que os nós internos
+ são operadores (funções) e as folhas são constantes ou variáveis.
+ Os operadores disponíveis para a criação dos indivíduos são {
+\begin_inset Formula $+,-,*,/,cos,sin$
+\end_inset
+
+} sendo que os operadores que representam funções trigonométricas tem apenas
+ um filho à direita e os demais operadores tem sempre dois filhos, que podem
+ ser variáveis, terminais, ou outros operadores.
+ Cada operador da como saída um número, e pode receber como entrada a saída
+ de outro operador, obedecendo a propriedade de 
+\emph on
+fechamento
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename indiv_tree.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Indivíduo que representa a expressão 
+\begin_inset Formula $(\frac{5}{x1}+cos(2*x2))$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Experimentos
 \end_layout
 
 \begin_layout Section
-
-\lang brazilian
 Conclusões
 \end_layout
 
 \begin_layout Section
-
-\lang brazilian
 Bibliografia
 \end_layout
 

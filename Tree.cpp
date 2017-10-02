@@ -29,6 +29,17 @@ public:
         
         this->left = this->right = NULL;
     }
+    Tree(const Tree &obj){
+    	this->node_value = obj.node_value;
+    	this->num_of_var = obj.num_of_var;
+    	this->number = obj.number;
+    	this->left = this->right = NULL;
+    
+    	if(obj.left)
+    		left = new Tree(*obj.left);
+        if(obj.right)
+            right = new Tree(*obj.right);
+    }
 
     void generateOperator(bool isRoot){
     	this->node_value = operators[rand() % (num_of_op-2)];

@@ -27,13 +27,14 @@ public:
         // delete this->genotype;
     };
 
-    Individual(const Individual &obj){
+    Individual(const Individual &obj){ //Deep copy constructor
     	this->node_number = obj.node_number;
     	this->can_participate = obj.can_participate;
     	this->fitness = obj.fitness;
     	this->num_of_var = obj.num_of_var;
         this->ind_size = obj.ind_size;
         this->depth = obj.depth;
+        this->genotype = new Tree(*obj.genotype);
     }
 
     void generateGenotype(Tree *node){
