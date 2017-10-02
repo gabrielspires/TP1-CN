@@ -251,7 +251,136 @@ Indivíduo que representa a expressão
 \end_layout
 
 \begin_layout Standard
-Os indivíduos foram implementados em uma classe
+Os indivíduos e as árvores usadas para representar os indivíduos foram implement
+ados em duas classes que contém os atributos necessários para rodar o algoritmo.
+ Alguns destes atributos são:
+\end_layout
+
+\begin_layout Subsubsection*
+Classe Indivíduo
+\end_layout
+
+\begin_layout Itemize
+genotype: Ponteiro para a raiz da árvore de expressão (representação do
+ indivíduo).
+\end_layout
+
+\begin_layout Itemize
+ind_size: Tamanho da árvore que o indivíduo tem (usado para limitar o cresciment
+o do indivíduo).
+\end_layout
+
+\begin_layout Itemize
+num_of_var: Quantas variáveis existem no arquivo de entrada (x1, x2, ..., x8
+ por exemplo).
+\end_layout
+
+\begin_layout Itemize
+node_number: Usado para dar um número identificador para cada nó, o que
+ ajuda na hora de sortear um nó na mutação.
+\end_layout
+
+\begin_layout Itemize
+fitness: A fitness do indivíduo.
+\end_layout
+
+\begin_layout Subsubsection*
+Classe Tree
+\end_layout
+
+\begin_layout Itemize
+node_value: O que o nó representa (constante, operador ou variável).
+\end_layout
+
+\begin_layout Itemize
+left, right: Os filhos desse nó (lembrando que funções trigonométricas só
+ tem um filho).
+\end_layout
+
+\begin_layout Itemize
+number: O número identificador que foi dado para esse nó específico da árvore.
+\end_layout
+
+\begin_layout Standard
+Algumas constantes também foram criadas para controlar os parâmetros, que
+ são:
+\end_layout
+
+\begin_layout Itemize
+ind_max_size: Tamanho máximo do indivíduo.
+\end_layout
+
+\begin_layout Itemize
+max_gen: Número máximo de gerações.
+\end_layout
+
+\begin_layout Itemize
+init_pop_size: Número inicial de indivíduos.
+\end_layout
+
+\begin_layout Itemize
+max_pop_size: Número máximo de indivíduos que a população pode atingir (após
+ isso começam a ser descartados os piores indivíduos).
+\end_layout
+
+\begin_layout Itemize
+tourn_size: Tamanho do torneio (quanto maior o torneio maior a pressão seletiva).
+\end_layout
+
+\begin_layout Itemize
+cross_rate: Frequência em que cruzamentos ocorrem.
+\end_layout
+
+\begin_layout Itemize
+mut_rate: Frequência em que mutações ocorrem.
+\end_layout
+
+\begin_layout Standard
+Para gerar a população inicial, a função 
+\emph on
+generate_population
+\emph default
+ é chamada.
+ Dentro dela um loop roda 
+\emph on
+init_pop_size
+\emph default
+ vezes criando indivíduos da classe 
+\emph on
+Individual
+\emph default
+.
+ No construtor da classe 
+\emph on
+Individual
+\emph default
+ alguns valores padrão são atribuídos ao objeto e o genótipo do indivíduo
+ é gerado.
+\end_layout
+
+\begin_layout Standard
+Na função 
+\emph on
+generateGenotype
+\emph default
+ uma árvore aleatória é criada a partir da raiz.
+ A raiz da árvore é criada de forma que seja sempre um operador, dessa forma
+ evitamos que a raiz da árvore seja uma constante ou variável, o que nos
+ deixaria com uma árvore de um nó só.
+ A partir do segundo nó da árvore, cada nó tem uma probabilidade de 60%
+ de virar um operador, 20% de virar uma variável e 20% de virar uma constante.
+ Essa decisão de implementação foi tomada para evitar que indivíduos muito
+ pequenos fossem maioria na população, o que mais tarde iria prejudicar
+ a evolução.
+ Quando um nó vira uma constante ou variável, ele não gera mais filhos e
+ se torna uma folha da árvore.
+\end_layout
+
+\begin_layout Standard
+Depois de gerar toda a população inicial, a fitness é calculada na função
+ 
+\emph on
+calc_fitness
 \end_layout
 
 \begin_layout Section
