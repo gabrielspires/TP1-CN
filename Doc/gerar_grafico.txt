@@ -12,20 +12,20 @@
 # Se o formato PDF nao funcionar mude de Grafico.pdf pra Grafico.eps (linha 15 desse arquivo)
 
 set term postscript eps enhanced color
-set output 'Keij7_7-10-200-2-100.eps'
+set output 'saida_keij7_med_30_runs_test0000000.pdf'
 set title 'Best Fitness x Number of generation'
 set xlabel 'Generation'
 set ylabel 'Best Fitness'
-set style line 1 lc rgb '#8b1a0e' pt 0 ps 1 lt 1 lw 2 # --- red
-set style line 2 lc rgb '#1E90FF' pt 0 ps 1 lt 1 lw 2 # --- blue
-set style line 3 lc rgb '#45CE30' pt 0 ps 1 lt 1 lw 2 # --- green
+set style line 1 lc rgb '#8b1a0e' pt 7 ps 1 lt 1 lw 2 # --- red
+set style line 2 lc rgb '#1E90FF' pt 7 ps 1 lt 1 lw 2 # --- blue
+set style line 3 lc rgb '#45CE30' pt 7 ps 1 lt 1 lw 2 # --- green
 set style line 11 lc rgb '#808080' lt 1
 set style line 12 lc rgb '#808080' lt 0 lw 1
 set border 3 back ls 11
 set tics nomirror
 set grid back ls 12
-set key bottom right
-plot "Keij7_7-10-200-2-100.txt" u 1:2 every 2 t 'Best Fitness of generation' w lp ls 1
+set key top right
+plot "saida_keij7_med_30_runs_test.txt" u 1:2 every 3 t 'Best Fitness of generation' w lp ls 1
 
 #plot "keij-7_genXfit_full.txt" u 1:2 t 'Best Fitness of generation' w lp ls 1
 #plot "keij-7_genXfit_full.txt" u 1:3 t 'Medium Fitness of generation' w lp ls 2

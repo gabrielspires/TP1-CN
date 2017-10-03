@@ -427,11 +427,16 @@ s e trocados entre eles.
  uma mutação, nessa mutação um ou mais nós da árvore do indivíduo são alterados
  aleatoriamente, gerando mais diversidade na população.
  Caso o crossover não seja feito, algum indivíduo da população é jogado
- para a próxima população sem ser alterado.
+ para a próxima população sem ser alterado.41
 \end_layout
 
 \begin_layout Section
 Experimentos
+\end_layout
+
+\begin_layout Standard
+Para realizar os experimentos, foram testadas várias configurações dos parâmetro
+s do PG como os listados abaixo:
 \end_layout
 
 \begin_layout Itemize
@@ -472,7 +477,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename saida_keij7_med_30_runs_test.eps
+	filename saida_keij7_med_30_runs.eps
 
 \end_inset
 
@@ -483,7 +488,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Keijzer 7 - média de 30 execuções
+Keijzer 7 - Média de 30 execuções
 \end_layout
 
 \end_inset
@@ -517,7 +522,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-saida_keij10_med_30_runs_test
+Keijzer 10- Média de 30 execuções
 \end_layout
 
 \end_inset

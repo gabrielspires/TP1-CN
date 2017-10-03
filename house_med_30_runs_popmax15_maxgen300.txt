@@ -1,0 +1,9 @@
+./tp1 datasets/house-train.csv datasets/house-test.csv
+Ind. max size:   3
+Init. pop. size: 10
+Max. pop. size:  15
+Tournament size: 2
+Max. num. gen.:  300
+Crossover rate:  0.6
+Mutation rate:   0.4
+Min Fitness:  	 Mean Fitness: 	 Max Fitness:  
