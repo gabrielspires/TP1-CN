@@ -477,7 +477,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename saida_keij7_med_30_runs.eps
+	filename saida_keij7_med_30_runs.pdf
+	scale 120
 
 \end_inset
 
@@ -511,7 +512,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename saida_keij10_med_30_runs_test.eps
+	filename saida_keij10_med_30_runs_test.pdf
+	scale 120
 
 \end_inset
 
@@ -522,7 +524,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Keijzer 10- Média de 30 execuções
+Keijzer 10 - Média de 30 execuções
 \end_layout
 
 \end_inset
@@ -546,10 +548,21 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename house_med_30_runs_popmax15_maxgen300.pdf
+	scale 120
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-saida_house_med
+House - Média de 30 execuções
 \end_layout
 
 \end_inset
