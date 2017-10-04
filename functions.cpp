@@ -182,7 +182,9 @@ void evolve(vector <Individual*> &population, vector <Individual*> &new_populati
         remove_worst(population);
     }
 
-    keep_the_elite(population, new_population);
+    // for (int i = 0; i < elite_count; i++){
+        keep_the_elite(population, new_population);
+    // }
 
     // cout << init_pop_size << " - " << population.size() << " - " << new_population.size() << endl;
 

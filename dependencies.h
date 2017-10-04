@@ -15,7 +15,7 @@
 
 using namespace std;
 
-const int ind_max_size = 7,
+const int ind_max_size = 4,
                max_gen = 300,
          init_pop_size = 50,
           max_pop_size = 200,
@@ -25,7 +25,7 @@ const int ind_max_size = 7,
 const double cross_rate = 0.6,
                mut_rate = 0.4;
 
-const double elitism_rate = 0.10;
+const int elite_count = 2;
 
 extern int node_number;
 
